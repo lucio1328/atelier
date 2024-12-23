@@ -1,0 +1,127 @@
+CREATE TABLE genre(
+   Id_genre SERIAL,
+   libelle VARCHAR(50)  NOT NULL,
+   PRIMARY KEY(Id_genre),
+   UNIQUE(libelle)
+);
+
+CREATE TABLE clients(
+   Id_clients SERIAL,
+   nom VARCHAR(50)  NOT NULL,
+   prenom VARCHAR(50) ,
+   date_naissance DATE NOT NULL,
+   email VARCHAR(50) ,
+   telephone VARCHAR(50)  NOT NULL,
+   adresse VARCHAR(50)  NOT NULL,
+   Id_genre INTEGER NOT NULL,
+   PRIMARY KEY(Id_clients),
+   FOREIGN KEY(Id_genre) REFERENCES genre(Id_genre)
+);
+
+CREATE TABLE pieces_detachees(
+   Id_pieces_detachees SERIAL,
+   nom_piece VARCHAR(50)  NOT NULL,
+   reference VARCHAR(50)  NOT NULL,
+   description VARCHAR(255) ,
+   PRIMARY KEY(Id_pieces_detachees),
+   UNIQUE(nom_piece),
+   UNIQUE(reference)
+);
+
+CREATE TABLE techniciens(
+   Id_techniciens SERIAL,
+   nom VARCHAR(50)  NOT NULL,
+   prenom VARCHAR(50) ,
+   date_naissance DATE NOT NULL,
+   email VARCHAR(50)  NOT NULL,
+   mot_de_passe VARCHAR(50)  NOT NULL,
+   Id_genre INTEGER NOT NULL,
+   PRIMARY KEY(Id_techniciens),
+   UNIQUE(email),
+   FOREIGN KEY(Id_genre) REFERENCES genre(Id_genre)
+);
+
+CREATE TABLE specialites(
+   Id_specialites SERIAL,
+   libelle VARCHAR(255)  NOT NULL,
+   PRIMARY KEY(Id_specialites),
+   UNIQUE(libelle)
+);
+
+CREATE TABLE statut(
+   Id_statut SERIAL,
+   libelle VARCHAR(50)  NOT NULL,
+   PRIMARY KEY(Id_statut),
+   UNIQUE(libelle)
+);
+
+CREATE TABLE achat_pieces(
+   Id_achat_pieces SERIAL,
+   quantite INTEGER NOT NULL,
+   quantite_disponible INTEGER NOT NULL,
+   prix_unitaire NUMERIC(20,5)   NOT NULL,
+   date_achat DATE NOT NULL,
+   Id_pieces_detachees INTEGER NOT NULL,
+   PRIMARY KEY(Id_achat_pieces),
+   FOREIGN KEY(Id_pieces_detachees) REFERENCES pieces_detachees(Id_pieces_detachees)
+);
+
+CREATE TABLE type_mouvement(
+   Id_type_mouvement SERIAL,
+   libelle VARCHAR(50)  NOT NULL,
+   PRIMARY KEY(Id_type_mouvement),
+   UNIQUE(libelle)
+);
+
+CREATE TABLE reparations(
+   Id_reparations SERIAL,
+   description VARCHAR(50)  NOT NULL,
+   date_debut DATE NOT NULL,
+   date_fin DATE NOT NULL,
+   Id_techniciens INTEGER NOT NULL,
+   Id_clients INTEGER NOT NULL,
+   Id_statut INTEGER NOT NULL,
+   PRIMARY KEY(Id_reparations),
+   FOREIGN KEY(Id_techniciens) REFERENCES techniciens(Id_techniciens),
+   FOREIGN KEY(Id_clients) REFERENCES clients(Id_clients),
+   FOREIGN KEY(Id_statut) REFERENCES statut(Id_statut)
+);
+
+CREATE TABLE factures(
+   Id_factures SERIAL,
+   montant NUMERIC(20,5)   NOT NULL,
+   daty DATE NOT NULL,
+   Id_reparations INTEGER NOT NULL,
+   PRIMARY KEY(Id_factures),
+   FOREIGN KEY(Id_reparations) REFERENCES reparations(Id_reparations)
+);
+
+CREATE TABLE mouvements_stock(
+   Id_mouvements_stock SERIAL,
+   quantite INTEGER NOT NULL,
+   date_mouvement DATE NOT NULL,
+   Id_achat_pieces INTEGER NOT NULL,
+   Id_reparations INTEGER NOT NULL,
+   Id_type_mouvement INTEGER NOT NULL,
+   PRIMARY KEY(Id_mouvements_stock),
+   FOREIGN KEY(Id_achat_pieces) REFERENCES achat_pieces(Id_achat_pieces),
+   FOREIGN KEY(Id_reparations) REFERENCES reparations(Id_reparations),
+   FOREIGN KEY(Id_type_mouvement) REFERENCES type_mouvement(Id_type_mouvement)
+);
+
+CREATE TABLE specialite_technicien(
+   Id_techniciens INTEGER,
+   Id_specialites INTEGER,
+   PRIMARY KEY(Id_techniciens, Id_specialites),
+   FOREIGN KEY(Id_techniciens) REFERENCES techniciens(Id_techniciens),
+   FOREIGN KEY(Id_specialites) REFERENCES specialites(Id_specialites)
+);
+
+CREATE TABLE reparation_pieces(
+   Id_pieces_detachees INTEGER,
+   Id_reparations INTEGER,
+   quantite INTEGER NOT NULL,
+   PRIMARY KEY(Id_pieces_detachees, Id_reparations),
+   FOREIGN KEY(Id_pieces_detachees) REFERENCES pieces_detachees(Id_pieces_detachees),
+   FOREIGN KEY(Id_reparations) REFERENCES reparations(Id_reparations)
+);
