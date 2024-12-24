@@ -2,7 +2,7 @@ package com.gestion.atelier.DTO;
 
 import java.util.Date;
 
-public class TechniciensDTO {
+public class AdminsDTO {
 
     private Long id;
     private String nom;
@@ -12,7 +12,7 @@ public class TechniciensDTO {
     private String motDePasse;
     private GenreDTO genre;
     
-    public TechniciensDTO(Long id, String nom, String prenom, Date dateNaissance, String email, String motDePasse,
+    public AdminsDTO(Long id, String nom, String prenom, Date dateNaissance, String email, String motDePasse,
             GenreDTO genre) {
         this.id = id;
         this.nom = nom;
@@ -22,9 +22,8 @@ public class TechniciensDTO {
         this.motDePasse = motDePasse;
         this.genre = genre;
     }
-    public TechniciensDTO() {
+    public AdminsDTO() {
     }
-
     
     public Long getId() {
         return id;

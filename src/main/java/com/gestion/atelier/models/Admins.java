@@ -1,73 +1,97 @@
-package com.gestion.atelier.DTO;
+package com.gestion.atelier.models;
 
 import java.util.Date;
 
-public class TechniciensDTO {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity
+public class Admins {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private String nom;
-    private String prenom;
-    private Date dateNaissance;
-    private String email;
-    private String motDePasse;
-    private GenreDTO genre;
-    
-    public TechniciensDTO(Long id, String nom, String prenom, Date dateNaissance, String email, String motDePasse,
-            GenreDTO genre) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.dateNaissance = dateNaissance;
-        this.email = email;
-        this.motDePasse = motDePasse;
-        this.genre = genre;
-    }
-    public TechniciensDTO() {
-    }
 
-    
+    @Column(name = "nom", nullable = false)
+    private String nom;
+
+    @Column(name = "prenom")
+    private String prenom;
+
+    @Column(name = "date_naissance", nullable = false)
+    private Date dateNaissance;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "mot_de_passe", nullable = false)
+    private String motDePasse;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_genre")
+    private Genre genre;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getNom() {
         return nom;
     }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
+
     public String getPrenom() {
         return prenom;
     }
+
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
     public Date getDateNaissance() {
         return dateNaissance;
     }
+
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getMotDePasse() {
         return motDePasse;
     }
+
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
-    public GenreDTO getGenre() {
+
+    public Genre getGenre() {
         return genre;
     }
-    public void setGenre(GenreDTO genre) {
+
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
 }
-
