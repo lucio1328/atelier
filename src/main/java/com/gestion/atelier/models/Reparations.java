@@ -35,6 +35,10 @@ public class Reparations {
     private Clients client;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_ordinateur")
+    private Ordinateurs ordinateur;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_statut")
     private Statut statut;
 
