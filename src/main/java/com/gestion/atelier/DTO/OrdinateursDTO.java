@@ -8,6 +8,17 @@ public class OrdinateursDTO {
     private ClientsDTO client;
     private ModelesDTO modele;
 
+    public OrdinateursDTO(Long id, String numeroSerie, String description, ClientsDTO client, ModelesDTO modele) {
+        this.id = id;
+        this.numeroSerie = numeroSerie;
+        this.description = description;
+        this.client = client;
+        this.modele = modele;
+    }
+
+    public OrdinateursDTO() {
+    }
+
     public Long getId() {
         return id;
     }

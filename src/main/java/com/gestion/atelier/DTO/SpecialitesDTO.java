@@ -4,6 +4,9 @@ public class SpecialitesDTO {
 
     private Long id;
     private String libelle;
+    
+    public SpecialitesDTO() {
+    }
 
     public SpecialitesDTO(Long id, String libelle) {
         this.id = id;

@@ -5,6 +5,9 @@ public class StatutDTO {
     private Long id;
     private String libelle;
 
+    public StatutDTO() {
+    }
+
     public StatutDTO(Long id, String libelle) {
         this.id = id;
         this.libelle = libelle;

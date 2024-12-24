@@ -11,6 +11,9 @@ public class MouvementsStockDTO {
     private ReparationsDTO reparation;
     private TypeMouvementDTO typeMouvement;
 
+    public MouvementsStockDTO() {
+    }
+
     public MouvementsStockDTO(Long id, Integer quantite, Date dateMouvement, AchatPiecesDTO achatPiece, ReparationsDTO reparation, TypeMouvementDTO typeMouvement) {
         this.id = id;
         this.quantite = quantite;

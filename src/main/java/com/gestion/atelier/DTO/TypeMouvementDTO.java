@@ -5,6 +5,9 @@ public class TypeMouvementDTO {
     private Long id;
     private String libelle;
 
+    public TypeMouvementDTO() {
+    }
+
     public TypeMouvementDTO(Long id, String libelle) {
         this.id = id;
         this.libelle = libelle;

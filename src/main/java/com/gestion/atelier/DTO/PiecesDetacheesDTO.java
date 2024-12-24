@@ -7,6 +7,9 @@ public class PiecesDetacheesDTO {
     private String reference;
     private String description;
 
+    public PiecesDetacheesDTO() {
+    }
+
     public PiecesDetacheesDTO(Long id, String nomPiece, String reference, String description) {
         this.id = id;
         this.nomPiece = nomPiece;

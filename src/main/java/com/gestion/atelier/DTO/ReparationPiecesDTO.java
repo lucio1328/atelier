@@ -6,6 +6,9 @@ public class ReparationPiecesDTO {
     private ReparationsDTO reparation;
     private Integer quantite;
 
+    public ReparationPiecesDTO() {
+    }
+
     public ReparationPiecesDTO(PiecesDetacheesDTO pieceDetachee, ReparationsDTO reparation, Integer quantite) {
         this.pieceDetachee = pieceDetachee;
         this.reparation = reparation;

@@ -6,6 +6,14 @@ public class ModelesDTO {
     private String nomModele;
     private MarquesDTO marque;
 
+    public ModelesDTO(Long id, String nomModele, MarquesDTO marque) {
+        this.id = id;
+        this.nomModele = nomModele;
+        this.marque = marque;
+    }
+    public ModelesDTO() {
+    }
+
     public Long getId() {
         return id;
     }

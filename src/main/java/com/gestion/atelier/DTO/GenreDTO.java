@@ -5,6 +5,9 @@ public class GenreDTO {
     private Long id;
     private String libelle;
 
+    public GenreDTO() {
+    }
+
     public GenreDTO(Long id, String libelle) {
         this.id = id;
         this.libelle = libelle;

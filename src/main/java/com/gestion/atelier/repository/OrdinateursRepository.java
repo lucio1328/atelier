@@ -11,13 +11,13 @@ import com.gestion.atelier.models.Ordinateurs;
 @Repository
 public interface OrdinateursRepository extends JpaRepository<Ordinateurs, Long> {
 
-    @Query("SELECT o FROM Ordinateur o " +
+    @Query("SELECT o FROM Ordinateurs o " +
            "JOIN FETCH o.modele m " +
            "JOIN FETCH o.client c " +
            "WHERE o.id = :id")
     Ordinateurs getById(Long id);
 
-    @Query("SELECT o FROM Ordinateur o " +
+    @Query("SELECT o FROM Ordinateurs o " +
            "JOIN FETCH o.modele m " + 
            "JOIN FETCH o.client c")
     List<Ordinateurs> getAll();

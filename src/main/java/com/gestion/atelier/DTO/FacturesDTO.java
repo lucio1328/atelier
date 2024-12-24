@@ -9,6 +9,9 @@ public class FacturesDTO {
     private Date date;
     private ReparationsDTO reparation;
 
+    public FacturesDTO() {
+    }
+
     public FacturesDTO(Long id, Double montant, Date date, ReparationsDTO reparation) {
         this.id = id;
         this.montant = montant;

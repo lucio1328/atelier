@@ -33,6 +33,17 @@ public class Ordinateurs {
     @JoinColumn(name = "id_modele", nullable = false)
     private Modeles modele;
 
+    public Ordinateurs(Long id, String numeroSerie, String description, Clients client, Modeles modele) {
+        this.id = id;
+        this.numeroSerie = numeroSerie;
+        this.description = description;
+        this.client = client;
+        this.modele = modele;
+    }
+
+    public Ordinateurs() {
+    }
+
     public Long getId() {
         return id;
     }

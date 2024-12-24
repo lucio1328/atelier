@@ -5,6 +5,9 @@ public class SpecialiteTechnicienDTO {
     private TechniciensDTO technicien;
     private SpecialitesDTO specialite;
 
+    public SpecialiteTechnicienDTO() {
+    }
+
     public SpecialiteTechnicienDTO(TechniciensDTO technicien, SpecialitesDTO specialite) {
         this.technicien = technicien;
         this.specialite = specialite;

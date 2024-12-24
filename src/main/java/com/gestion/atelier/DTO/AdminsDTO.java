@@ -12,6 +12,8 @@ public class AdminsDTO {
     private String motDePasse;
     private GenreDTO genre;
     
+    public AdminsDTO() {
+    }
     public AdminsDTO(Long id, String nom, String prenom, Date dateNaissance, String email, String motDePasse,
             GenreDTO genre) {
         this.id = id;
@@ -22,9 +24,7 @@ public class AdminsDTO {
         this.motDePasse = motDePasse;
         this.genre = genre;
     }
-    public AdminsDTO() {
-    }
-    
+
     public Long getId() {
         return id;
     }

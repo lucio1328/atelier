@@ -13,6 +13,9 @@ public class ClientsDTO {
     private String adresse;
     private GenreDTO genre;
 
+    public ClientsDTO() {
+    }
+
     public ClientsDTO(Long id, String nom, String prenom, Date dateNaissance, String email, String telephone, String adresse, GenreDTO genre) {
         this.id = id;
         this.nom = nom;

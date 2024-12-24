@@ -11,6 +11,9 @@ public class AchatPiecesDTO {
     private Date dateAchat;
     private PiecesDetacheesDTO pieceDetachee;
 
+    public AchatPiecesDTO() {
+    }
+
     public AchatPiecesDTO(Long id, Integer quantite, Integer quantiteDisponible, Double prixUnitaire, Date dateAchat, PiecesDetacheesDTO pieceDetachee) {
         this.id = id;
         this.quantite = quantite;
