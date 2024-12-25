@@ -9,11 +9,8 @@ import com.gestion.atelier.DTO.ReparationsDTO;
 import com.gestion.atelier.mappers.ReparationPiecesMapper;
 import com.gestion.atelier.repository.ReparationPiecesRepository;
 import com.gestion.atelier.models.ReparationPieces;
-import com.gestion.atelier.models.PiecesDetachees;
-import com.gestion.atelier.models.Reparations;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

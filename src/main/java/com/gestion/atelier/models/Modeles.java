@@ -27,4 +27,37 @@ public class Modeles {
     @JoinColumn(name = "id_marque", nullable = false)
     private Marques marque;
 
+    public Modeles(Long id, String nomModele, Marques marque) {
+        this.id = id;
+        this.nomModele = nomModele;
+        this.marque = marque;
+    }
+
+    public Modeles() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNomModele() {
+        return nomModele;
+    }
+
+    public void setNomModele(String nomModele) {
+        this.nomModele = nomModele;
+    }
+
+    public Marques getMarque() {
+        return marque;
+    }
+
+    public void setMarque(Marques marque) {
+        this.marque = marque;
+    }
+
 }

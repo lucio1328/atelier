@@ -19,6 +19,14 @@ public class Marques {
     @Column(name = "nom_marque", nullable = false, unique = true, length = 50)
     private String nomMarque;
 
+    public Marques(Long id, String nomMarque) {
+        this.id = id;
+        this.nomMarque = nomMarque;
+    }
+
+    public Marques() {
+    }
+
     public Long getId() {
         return id;
     }

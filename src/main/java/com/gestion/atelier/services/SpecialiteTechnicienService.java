@@ -13,16 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class SpecialiteTechnicienService {
 
-    private final SpecialiteTechnicienRepository specialiteTechnicienRepository;
-
-    private final SpecialiteTechnicienMapper specialiteTechnicienMapper;
-
     @Autowired
-    public SpecialiteTechnicienService(SpecialiteTechnicienRepository specialiteTechnicienRepository,
-                                       SpecialiteTechnicienMapper specialiteTechnicienMapper) {
-        this.specialiteTechnicienRepository = specialiteTechnicienRepository;
-        this.specialiteTechnicienMapper = specialiteTechnicienMapper;
-    }
+    private SpecialiteTechnicienRepository specialiteTechnicienRepository;
+
+    private final SpecialiteTechnicienMapper specialiteTechnicienMapper =  SpecialiteTechnicienMapper.INSTANCE;
 
     //
     public List<SpecialiteTechnicienDTO> getAll() {
