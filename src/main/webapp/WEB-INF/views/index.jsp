@@ -1,5 +1,5 @@
 <%
-    String view = request.getParameter("view");
+    String view = (String) request.getAttribute("view");
     if (view == null) {
         view = "home.jsp";
     }
@@ -81,7 +81,7 @@
                     </a>
                     <ul id="marques-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="/marques/insertion">
+                            <a href="/marques/create">
                                 <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
                             </a>
                         </li>
