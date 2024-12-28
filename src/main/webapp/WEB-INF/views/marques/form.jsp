@@ -26,13 +26,19 @@
                     </div>
                 <% } %>
 
-                <form action="<%= ("create".equals(request.getAttribute("action"))) ? "create" : "edit/" + marque.getId() %>" method="post">
+                <form action="<% if("create".equals(request.getAttribute("action"))){
+                        out.println("/marques/create");
+                    } 
+                    else {
+                        out.println("/marques/edit/" + marque.getId());
+                    }%>" 
+                    method="post">
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom :</label>
                         <input 
                             type="text" 
                             id="nom" 
-                            name="nom" 
+                            name="nomMarque" 
                             class="form-control" 
                             value="<%= (marque != null) ? marque.getNomMarque() : "" %>" 
                             required>

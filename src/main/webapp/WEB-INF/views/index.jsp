@@ -100,7 +100,7 @@
                     </a>
                     <ul id="modeles-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="/modeles/insertion">
+                            <a href="/modeles/create">
                                 <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
                             </a>
                         </li>
