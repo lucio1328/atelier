@@ -112,6 +112,25 @@
                     </ul>
                 </li><!-- End Modèles Nav -->
 
+                <!-- Section Modèles -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#specialites-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-arrow-down-circle"></i><span>Specialites</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="specialites-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/specialites/create">
+                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/specialites/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li><!-- End Modèles Nav -->
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#composant-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-arrow-down-circle"></i><span>Composant</span><i class="bi bi-chevron-down ms-auto"></i>
