@@ -18,7 +18,7 @@ public class MarquesController {
     // Afficher la liste des marques
     @GetMapping("/liste")
     public ModelAndView listMarques() {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("accueil");
         mav.addObject("view", "marques/liste.jsp");
         mav.addObject("marques", marquesService.getAll());
         return mav;
@@ -27,7 +27,7 @@ public class MarquesController {
     // Afficher le formulaire de création
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("accueil");
         mav.addObject("view", "marques/form.jsp");
         mav.addObject("action", "create");
         return mav;
@@ -41,7 +41,7 @@ public class MarquesController {
             return new ModelAndView("redirect:/marques/liste");
         } 
         catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "marques/form.jsp");
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
             mav.addObject("marque", marquesDTO);
@@ -53,7 +53,7 @@ public class MarquesController {
     // Afficher le formulaire de modification
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("accueil");
         try {
             MarquesDTO marque = marquesService.getById(id);
             mav.addObject("view", "marques/form.jsp");
@@ -61,7 +61,7 @@ public class MarquesController {
             mav.addObject("action", "edit");
         } 
         catch (Exception e) {
-            mav.setViewName("index");
+            mav.setViewName("accueil");
             mav.addObject("view", "error");
             mav.addObject("message", "Marque introuvable");
         }
@@ -76,7 +76,7 @@ public class MarquesController {
             return new ModelAndView("redirect:/marques/liste");
         } 
         catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "marques/form.jsp");
             mav.addObject("error", "Erreur lors de la mise à jour : " + e.getMessage());
             mav.addObject("marque", marquesDTO);
@@ -93,7 +93,7 @@ public class MarquesController {
             return new ModelAndView("redirect:/marques/liste");
         } 
         catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "error");
             mav.addObject("message", "Erreur lors de la suppression : " + e.getMessage());
             return mav;

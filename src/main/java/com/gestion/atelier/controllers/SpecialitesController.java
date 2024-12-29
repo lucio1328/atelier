@@ -19,7 +19,7 @@ public class SpecialitesController {
     // Afficher la liste des spécialités
     @GetMapping("/liste")
     public ModelAndView getAllSpecialites() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("accueil");
         List<SpecialitesDTO> specialites = specialitesService.getAllSpecialites();
 
         modelAndView.addObject("view", "specialites/liste.jsp");
@@ -30,7 +30,7 @@ public class SpecialitesController {
     // Afficher le formulaire de création d'une spécialité
     @GetMapping("/create")
     public ModelAndView createSpecialiteForm() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("accueil");
         modelAndView.addObject("view", "specialites/form.jsp");
         modelAndView.addObject("action", "create");
         return modelAndView;
@@ -48,7 +48,7 @@ public class SpecialitesController {
             specialitesService.createSpecialite(specialitesDTO);
             return new ModelAndView("redirect:/specialites/liste");
         } catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "specialites/form.jsp");
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
             mav.addObject("specialite", specialitesDTO);
@@ -60,7 +60,7 @@ public class SpecialitesController {
     // Afficher le formulaire de modification d'une spécialité
     @GetMapping("/edit/{id}")
     public ModelAndView editSpecialiteForm(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("accueil");
         try {
             SpecialitesDTO specialite = specialitesService.getSpecialiteById(id);
 
@@ -100,7 +100,7 @@ public class SpecialitesController {
             specialitesService.deleteSpecialite(id);
             return new ModelAndView("redirect:/specialites/liste");
         } catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("message", "Erreur lors de la suppression : " + e.getMessage());
             return mav;
         }

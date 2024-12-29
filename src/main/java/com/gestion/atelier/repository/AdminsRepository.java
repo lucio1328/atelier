@@ -16,4 +16,7 @@ public interface AdminsRepository extends JpaRepository<Admins, Long> {
 
     @Query("SELECT a FROM Admins a LEFT JOIN FETCH a.genre WHERE a.id = :id")
     Admins getById(Long id);
+
+    @Query("SELECT a FROM Admins a LEFT JOIN FETCH a.genre WHERE a.email = :email")
+    Admins getByEmail(String email);
 }

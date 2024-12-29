@@ -1,254 +1,172 @@
-<%
-    String view = (String) request.getAttribute("view");
-    if (view == null) {
-        view = "home.jsp";
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Atelier</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
+  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-        <!-- Favicons -->
-        <link href="/img/favicon.png" rel="icon">
-        <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.gstatic.com" rel="preconnect">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-        <!-- Vendor CSS Files -->
-        <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
-        <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
-        <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
-        <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
 
-        <!-- Template Main CSS File -->
-        <link href="/css/style.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: NiceAdmin
-        * Updated: Jul 27 2023 with Bootstrap v5.3.1
-        * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
-    </head>
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<style>
+    body {
+    background-color: #f4f6f9; /* Couleur de fond douce */
+    }
 
-    <body>
+    .card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        <!-- ======= Header ======= -->
-        <header id="header" class="header fixed-top d-flex align-items-center">
+    .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s;
+    }
 
-            <div class="d-flex align-items-center justify-content-between">
-                <a class="logo d-flex align-items-center">
-                    <span>Atelier</span>
+    .btn-primary:hover {
+    background-color: #0056b3;
+    }
+
+    .logo img {
+    max-height: 50px;
+    }
+
+    .section.register {
+    background: linear-gradient(to bottom right, #4e73df, #224abe);
+    color: #fff;
+    }
+
+    .form-control {
+    border-radius: 5px;
+    }
+
+</style>
+<body>
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="/index" class="logo d-flex align-items-center w-auto">
+                  <img src="/img/atelier.png" alt="">
+                  <span class="d-none d-lg-block">Atelier de reparation d'ordinateur</span>
                 </a>
-                <i class="bi bi-list toggle-sidebar-btn"></i>
-            </div><!-- End Logo -->
+              </div><!-- End Logo -->
 
-            <!-- End Search Bar -->
+              <div class="card mb-3">
 
+                <div class="card-body">
 
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Se connecter a votre compte</h5>
+                    <p class="text-center small">Entrer votre email & mot de passe pour se connecter</p>
+                  </div>
+                  </div>
 
-        </header><!-- End Header -->
+                  <% 
+                     String errorMessage = (String) request.getAttribute("error");
+                     if (errorMessage != null) { 
+                  %>
+                  <div class="alert alert-danger">
+                    <%= errorMessage %>
+                  </div>
+                  <% } %>
+                  <form class="row g-3 needs-validation" action="/connection/verification" method="post">
 
-        <!-- ======= Sidebar ======= -->
-        <aside id="sidebar" class="sidebar">
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label">Email</label>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" name="email" class="form-control" id="yourUsername" required>
+                        <div class="invalid-feedback">L'email est obligatoire.</div>
+                      </div>
+                    </div>
 
-            <ul class="sidebar-nav" id="sidebar-nav">
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Password</label>
+                      <input type="password" name="mdp" class="form-control" id="yourPassword" required>
+                      <div class="invalid-feedback">Le mot de passe est obligatoire!</div>
+                    </div>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="/index">
-                        <i class="bi bi-grid"></i>
-                        Tableau de bord
-                    </a>
-                </li><!-- End Dashboard Nav -->
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit">Se connecter</button>
+                    </div>
+                    <%-- <div class="col-12">
+                      <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+                    </div> --%>
+                  </form>
 
-                <!-- Section Marques -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#marques-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Marques</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="marques-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/marques/create">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/marques/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Marques Nav -->
+                </div>
+              </div>
 
-                <!-- Section Modèles -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#modeles-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Modeles</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="modeles-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/modeles/create">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/modeles/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Modèles Nav -->
-
-                <!-- Section Modèles -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#specialites-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Specialites</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="specialites-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/specialites/create">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/specialites/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Modèles Nav -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#composant-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Composant</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="composant-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/composant/insertion">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/composant/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/composant/stock">
-                                <i class="bi bi-circle"></i><span>Stock</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Composant Nav -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Client</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="client-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/client/insertion">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/client/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Client Nav -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#technicien-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Technicien</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="technicien-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/technicien/insertion">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/technicien/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Technicien Nav -->
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#reparation-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Reparation</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="reparation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="/reparation/insertion">
-                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/reparation/liste">
-                                <i class="bi bi-circle"></i><span>Liste</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li><!-- End Reparation Nav -->
-
-            </ul>
-
-        </aside><!-- End Sidebar -->
-
-        <main id="main" class="main">
-
-            <jsp:include page="<%=view%>"/>
-
-
-
-        </main><!-- End #main -->
-
-        <!-- ======= Footer ======= -->
-        <footer id="footer" class="footer">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Atelier de reparation</span></strong>. All Rights Reserved
             </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                
-            </div>
-        </footer><!-- End Footer -->
+          </div>
+        </div>
+        <div>
+          <a href="/connection/inscription">Creer un compte admin</a>
+        </div>
 
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      </section>
 
-        <!-- Vendor JS Files -->
-        <script src="/vendor/apexcharts/apexcharts.min.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/vendor/chart.js/chart.umd.js"></script>
-        <script src="/vendor/echarts/echarts.min.js"></script>
-        <script src="/vendor/quill/quill.min.js"></script>
-        <script src="/vendor/simple-datatables/simple-datatables.js"></script>
-        <script src="/vendor/tinymce/tinymce.min.js"></script>
-        <script src="/vendor/php-email-form/validate.js"></script>
+    </div>
+  </main><!-- End #main -->
 
-        <!-- Template Main JS File -->
-        <script src="/js/main.js"></script>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    </body>
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+</body>
 
 </html>
