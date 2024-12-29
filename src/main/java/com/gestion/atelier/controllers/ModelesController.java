@@ -24,7 +24,7 @@ public class ModelesController {
     // Afficher la liste des modèles
     @GetMapping("/liste")
     public ModelAndView getAllModeles() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("accueil");
         List<ModelesDTO> modeles = modelesService.getAll();
 
         modelAndView.addObject("view", "modeles/liste.jsp");
@@ -35,7 +35,7 @@ public class ModelesController {
     // Afficher le formulaire de création d'un modèle
     @GetMapping("/create")
     public ModelAndView createModeleForm() {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("accueil");
         List<MarquesDTO> marques = marquesService.getAll();
 
         modelAndView.addObject("view", "modeles/form.jsp");
@@ -61,7 +61,7 @@ public class ModelesController {
             return new ModelAndView("redirect:/modeles/liste");
         } 
         catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "modeles/form.jsp");
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
             mav.addObject("modele", modelesDTO);
@@ -74,7 +74,7 @@ public class ModelesController {
     // Afficher le formulaire de modification d'un modèle
     @GetMapping("/edit/{id}")
     public ModelAndView editModeleForm(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("accueil");
         try {
             ModelesDTO modele = modelesService.getById(id);
             List<MarquesDTO> marques = marquesService.getAll();
@@ -118,7 +118,7 @@ public class ModelesController {
             return new ModelAndView("redirect:/modeles/liste");
         } 
         catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "modeles/form.jsp");
             mav.addObject("error", "Erreur lors de la mise à jour : " + e.getMessage());
             mav.addObject("modele", modelesDTO);
@@ -135,7 +135,7 @@ public class ModelesController {
             return new ModelAndView("redirect:/modeles/liste");
         } 
         catch (Exception e) {
-            ModelAndView mav = new ModelAndView("index");
+            ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("message", "Erreur lors de la suppression : " + e.getMessage());
             return mav;
         }
