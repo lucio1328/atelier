@@ -96,7 +96,16 @@
                     <h5 class="card-title text-center pb-0 fs-4">Se connecter a votre compte</h5>
                     <p class="text-center small">Entrer votre email & mot de passe pour se connecter</p>
                   </div>
+                  </div>
 
+                  <% 
+                     String errorMessage = (String) request.getAttribute("error");
+                     if (errorMessage != null) { 
+                  %>
+                  <div class="alert alert-danger">
+                    <%= errorMessage %>
+                  </div>
+                  <% } %>
                   <form class="row g-3 needs-validation" action="/connection/verification" method="post">
 
                     <div class="col-12">
@@ -133,6 +142,9 @@
 
             </div>
           </div>
+        </div>
+        <div>
+          <a href="/connection/inscription">Creer un compte admin</a>
         </div>
 
       </section>

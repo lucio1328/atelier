@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.gestion.atelier.DTO.AdminsDTO;
 import com.gestion.atelier.mappers.AdminsMapper;
 import com.gestion.atelier.repository.AdminsRepository;
+import com.gestion.atelier.utils.PasswordUtil;
 import com.gestion.atelier.models.Admins;
 
 import java.util.List;
@@ -18,6 +19,25 @@ public class AdminsService {
     private AdminsRepository adminsRepository;
 
     private final AdminsMapper adminsMapper = AdminsMapper.INSTANCE;
+
+    //
+    public Admins verification(String email, String mdp) throws Exception {
+        if(email == null || mdp == null) {
+            if(email == null) {
+                throw new Exception("Le champ email est obligatoire");
+            }
+            else if(mdp == null) {
+                throw new Exception("Le champ mot de passe est obligatoire");
+            }
+        }
+        Admins admin = adminsRepository.getByEmail(email);
+        if(admin != null) {
+            if(PasswordUtil.checkPassword(mdp, admin.getMotDePasse())) {
+                return admin;
+            }
+        }
+        return null;
+    }
 
     //
     public AdminsDTO getById(Long id) throws Exception {
