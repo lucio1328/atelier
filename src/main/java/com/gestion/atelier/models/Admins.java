@@ -31,7 +31,7 @@ public class Admins {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "mot_de_passe", nullable = false)
+    @Column(name = "mot_de_passe", nullable = false, length = 255)
     private String motDePasse;
 
     @ManyToOne(fetch = FetchType.LAZY)
