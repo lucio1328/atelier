@@ -92,12 +92,12 @@ public class TechniciensController {
     public ModelAndView editTechnicienForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("accueil");
         try {
-            TechniciensDTO client = techniciensService.getById(id);
+            TechniciensDTO technicien = techniciensService.getById(id);
             List<GenreDTO> genre = genreService.getAll();
 
             modelAndView.addObject("view", "techniciens/form.jsp");
             modelAndView.addObject("genres", genre);
-            modelAndView.addObject("client", client);
+            modelAndView.addObject("technicien", technicien);
             return modelAndView;
         } 
         catch (Exception e) {
@@ -112,7 +112,7 @@ public class TechniciensController {
 
     // Modifier un technicien existant
     @PostMapping("/edit/{id}")
-    public ModelAndView editClient(@PathVariable Long id, 
+    public ModelAndView editTechnicien(@PathVariable Long id, 
                                 @RequestParam("nom") String nom,
                                 @RequestParam("prenom") String prenom,
                                 @RequestParam("dateNaissance") String dateNaissance,
