@@ -1,21 +1,18 @@
 -- Calcul du reste en stock par piece et prix unitaire
-
+CREATE OR REPLACE VIEW nombreEnStock as
 SELECT 
-    dap.Id_pieces_detachees,
-    dap.prix_unitaire,
-    SUM(CASE 
-            WHEN ms.Id_type_mouvement = 1 THEN ms.quantite  -- Entrée
-            WHEN ms.Id_type_mouvement = 2 THEN -ms.quantite -- Sortie
+    ap.id_pieces_detachee,
+    ap.prix_unitaire,
+    SUM(CASE  
+            WHEN ms.id_type_mouvement = 1 THEN ms.quantite  -- Entrée
+            WHEN ms.id_type_mouvement = 2 THEN -ms.quantite -- Sortie
             ELSE 0
         END) AS quantite_reste
-FROM 
-    details_achat_pieces dap
-LEFT JOIN 
-    mouvements_stock ms 
-ON 
-    dap.Id_details_achat_pieces = ms.Id_details_achat_pieces
+FROM pieces_detachees pd
+LEFT JOIN achat_pieces ap ON pd.id = ap.id_pieces_detachee
+LEFT JOIN mouvements_stock ms ON ap.id = ms.id_achat_pieces
 GROUP BY 
-    dap.Id_pieces_detachees, dap.prix_unitaire;
+    pd.id, ap.prix_unitaire;
 
 
 -- Enregistrer sortie de stock
