@@ -1,6 +1,6 @@
 package com.gestion.atelier.DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ClientsDTO {
 
