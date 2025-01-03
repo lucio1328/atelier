@@ -8,3 +8,8 @@ insert into marques(nom_marque) values ('hp'),
 -- genre
 insert into genre(libelle) values ('Homme'),
 ('Femme');
+
+-- statut
+insert into statut(libelle) values ('En attente'),
+('En cours'),
+('Termine');

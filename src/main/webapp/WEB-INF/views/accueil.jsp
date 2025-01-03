@@ -132,22 +132,22 @@
                 </li><!-- End Modèles Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#composant-nav" data-bs-toggle="collapse" href="#">
+                    <a class="nav-link collapsed" data-bs-target="#piece-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-arrow-down-circle"></i><span>Composant</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <ul id="composant-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <ul id="piece-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="/composant/insertion">
+                            <a href="/pieces/create">
                                 <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/composant/liste">
+                            <a href="/pieces/liste">
                                 <i class="bi bi-circle"></i><span>Liste</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/composant/stock">
+                            <a href="/pieces/stock">
                                 <i class="bi bi-circle"></i><span>Stock</span>
                             </a>
                         </li>
@@ -160,12 +160,12 @@
                     </a>
                     <ul id="client-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="/client/insertion">
+                            <a href="/clients/create">
                                 <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/client/liste">
+                            <a href="/clients/liste">
                                 <i class="bi bi-circle"></i><span>Liste</span>
                             </a>
                         </li>
@@ -178,12 +178,12 @@
                     </a>
                     <ul id="technicien-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="/technicien/insertion">
+                            <a href="/techniciens/create">
                                 <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/technicien/liste">
+                            <a href="/techniciens/liste">
                                 <i class="bi bi-circle"></i><span>Liste</span>
                             </a>
                         </li>
