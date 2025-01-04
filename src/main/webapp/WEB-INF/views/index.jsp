@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title>Connection</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -38,39 +38,108 @@
   ======================================================== -->
 </head>
 <style>
+    /* Fond général */
     body {
-    background-color: #f4f6f9; /* Couleur de fond douce */
+        background-color: #f4f6f9; /* Couleur de fond douce */
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
     }
 
-    .card {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    transition: background-color 0.3s;
-    }
-
-    .btn-primary:hover {
-    background-color: #0056b3;
-    }
-
-    .logo img {
-    max-height: 50px;
-    }
-
+    /* Section d'inscription avec dégradé */
     .section.register {
-    background: linear-gradient(to bottom right, #4e73df, #224abe);
-    color: #fff;
+        background: linear-gradient(to bottom right, #4e73df, #224abe); /* Gradient doux */
+        color: #fff;
+        min-height: 100vh; /* Hauteur pleine de l'écran */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* Carte de connexion avec ombre et bordure arrondie */
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre plus marquée */
+        padding: 30px;
+        width: 100%;
+        max-width: 450px; /* Limite la taille de la carte */
+        background: #fff; /* Fond de la carte */
+        border: 1px solid #ddd; /* Bordure claire autour de la carte */
+    }
+
+    /* Logo */
+    .logo img {
+        max-height: 50px;
+        margin-bottom: 20px;
+    }
+
+    /* Formulaire et champs de texte */
+    .form-label {
+        font-weight: bold;
+        margin-bottom: 10px;
     }
 
     .form-control {
-    border-radius: 5px;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        transition: border 0.3s, box-shadow 0.3s;
     }
 
+    /* Effet de focus sur les champs */
+    .form-control:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 5px rgba(78, 115, 223, 0.5); /* Légère ombre bleue lors du focus */
+        outline: none;
+    }
+
+    /* Bouton de soumission */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s;
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    /* Message d'erreur */
+    .alert-danger {
+        margin-top: 15px;
+        font-size: 1rem;
+        border-radius: 8px;
+    }
+
+    /* Liens en bas */
+    .footer-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .footer-link a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .footer-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* Réduire la taille de la carte sur mobile */
+    @media (max-width: 576px) {
+        .card {
+            width: 90%;
+        }
+    }
 </style>
+
 <body>
 
   <main>
