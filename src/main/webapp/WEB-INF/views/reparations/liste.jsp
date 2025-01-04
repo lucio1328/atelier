@@ -41,8 +41,8 @@
                         <td><%= reparation.getOrdinateur().getNumeroSerie() %></td>
                         <td><%= reparation.getStatut().getLibelle() %></td>
                         <td>
-                            <a href="/reparations/edit/<%= reparation.getId() %>" class="btn btn-sm btn-warning">Modifier</a>
-                            <a href="/reparations/delete/<%= reparation.getId() %>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="/reparations/edit/<%= reparation.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;""></a>
+                            <a href="/reparations/delete/<%= reparation.getId() %>" class="bi bi-trash" style="color: red;"></a>
                         </td>
                     </tr>
                 <% 

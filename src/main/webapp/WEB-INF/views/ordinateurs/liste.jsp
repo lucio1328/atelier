@@ -35,8 +35,8 @@
                         <td><%= ordinateur.getClient().getNom() %> <%= ordinateur.getClient().getPrenom() %></td>
                         <td><%= ordinateur.getModele().getNomModele() %></td>
                         <td>
-                            <a href="/ordinateurs/edit/<%= ordinateur.getId() %>" class="btn btn-sm btn-warning">Modifier</a>
-                            <a href="/ordinateurs/delete/<%= ordinateur.getId() %>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="/ordinateurs/edit/<%= ordinateur.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/ordinateurs/delete/<%= ordinateur.getId() %>" class="bi bi-trash" style="color: red;"></a>
                         </td>
                     </tr>
                 <% 

@@ -41,8 +41,8 @@
                         <td><%= client.getTelephone() %></td>
                         <td><%= client.getAdresse() %></td>
                         <td>
-                            <a href="/clients/edit/<%= client.getId() %>" class="btn btn-sm btn-warning">Modifier</a>
-                            <a href="/clients/delete/<%= client.getId() %>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="/clients/edit/<%= client.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/clients/delete/<%= client.getId() %>" class="bi bi-trash" style="color: red;"></a>
                         </td>
                     </tr>
                 <% 

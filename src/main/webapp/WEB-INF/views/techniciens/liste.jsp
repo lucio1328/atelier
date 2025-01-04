@@ -39,8 +39,8 @@
                         <td><%= client.getEmail() %></td>
                         <td><%= client.getMotDePasse() %></td>
                         <td>
-                            <a href="/techniciens/edit/<%= client.getId() %>" class="btn btn-sm btn-warning">Modifier</a>
-                            <a href="/techniciens/delete/<%= client.getId() %>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="/techniciens/edit/<%= client.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/techniciens/delete/<%= client.getId() %>" class="bi bi-trash" style="color: red;"></a>
                         </td>
                     </tr>
                 <% 
