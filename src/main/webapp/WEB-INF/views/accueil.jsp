@@ -240,6 +240,24 @@
                 </li><!-- End Composant Nav -->
 
                 <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#achat-piece-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-cart"></i><span>Achat Composant</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="achat-piece-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/achats/create">
+                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/achats/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li><!-- End Composant Nav -->
+
+                <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-person"></i><span>Client</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
