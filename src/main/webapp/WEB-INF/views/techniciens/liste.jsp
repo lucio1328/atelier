@@ -32,15 +32,16 @@
                 %>
                     <tr>
                         <td><%= client.getId() %></td>
-                        <td><%= client.getNom() %></td>
-                        <td><%= client.getPrenom() %></td>
+                        <td><a href="/techniciens/edit/<%= client.getId() %>"><%= client.getNom() %></a></td>
+                        <td><a href="/techniciens/edit/<%= client.getId() %>"><%= client.getPrenom() %></a></td>
                         <td><%= client.getDateNaissance() %></td>
                         <td><%= client.getGenre().getLibelle() %></td>
                         <td><%= client.getEmail() %></td>
                         <td><%= client.getMotDePasse() %></td>
                         <td>
                             <a href="/techniciens/edit/<%= client.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
-                            <a href="/techniciens/delete/<%= client.getId() %>" class="bi bi-trash" style="color: red;"></a>
+                            <a href="/techniciens/delete/<%= client.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
+                            <a href="/techniciens/specialites/<%= client.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
                         </td>
                     </tr>
                 <% 

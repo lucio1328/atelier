@@ -21,7 +21,7 @@ public class AdminsService {
     private final AdminsMapper adminsMapper = AdminsMapper.INSTANCE;
 
     //
-    public Admins verification(String email, String mdp) throws Exception {
+    public AdminsDTO verification(String email, String mdp) throws Exception {
         if(email == null || mdp == null) {
             if(email == null) {
                 throw new Exception("Le champ email est obligatoire");
@@ -31,9 +31,10 @@ public class AdminsService {
             }
         }
         Admins admin = adminsRepository.getByEmail(email);
-        if(admin != null) {
-            if(PasswordUtil.checkPassword(mdp, admin.getMotDePasse())) {
-                return admin;
+        AdminsDTO adminsDTO = adminsMapper.adminsToAdminsDTO(admin);
+        if(adminsDTO != null) {
+            if(PasswordUtil.checkPassword(mdp, adminsDTO.getMotDePasse())) {
+                return adminsDTO;
             }
         }
         return null;
