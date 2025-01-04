@@ -8,7 +8,7 @@ import com.gestion.atelier.mappers.ReparationsMapper;
 import com.gestion.atelier.repository.ReparationsRepository;
 import com.gestion.atelier.models.Reparations;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

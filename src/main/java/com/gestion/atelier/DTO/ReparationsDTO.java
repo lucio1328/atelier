@@ -5,25 +5,26 @@ import java.sql.Date;
 public class ReparationsDTO {
 
     private Long id;
-    private String description;
     private Date dateDebut;
     private Date dateFin;
-    private TechniciensDTO technicien;
+    private String description;
     private ClientsDTO client;
-    private OrdinateursDTO ordinateur;
     private StatutDTO statut;
+    private TechniciensDTO technicien;
+    private OrdinateursDTO ordinateur;
     
-    public ReparationsDTO(Long id, String description, Date dateDebut, Date dateFin, TechniciensDTO technicien,
-            ClientsDTO client, OrdinateursDTO ordinateur, StatutDTO statut) {
+    public ReparationsDTO(Long id, Date dateDebut, Date dateFin, String description, ClientsDTO client,
+            StatutDTO statut, TechniciensDTO technicien, OrdinateursDTO ordinateur) {
         this.id = id;
-        this.description = description;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.technicien = technicien;
+        this.description = description;
         this.client = client;
-        this.ordinateur = ordinateur;
         this.statut = statut;
+        this.technicien = technicien;
+        this.ordinateur = ordinateur;
     }
+
     public ReparationsDTO() {
     }
     

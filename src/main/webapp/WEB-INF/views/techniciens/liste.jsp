@@ -28,19 +28,20 @@
                 <% 
                     List<TechniciensDTO> techniciens = (List<TechniciensDTO>) request.getAttribute("techniciens");
                     if (techniciens != null && !techniciens.isEmpty()) {
-                        for (TechniciensDTO client : techniciens) {
+                        for (TechniciensDTO technicien : techniciens) {
                 %>
                     <tr>
-                        <td><%= client.getId() %></td>
-                        <td><%= client.getNom() %></td>
-                        <td><%= client.getPrenom() %></td>
-                        <td><%= client.getDateNaissance() %></td>
-                        <td><%= client.getGenre().getLibelle() %></td>
-                        <td><%= client.getEmail() %></td>
-                        <td><%= client.getMotDePasse() %></td>
+                        <td><%= technicien.getId() %></td>
+                        <td><a href="/specialiteTechnicien/liste/<%= technicien.getId() %>"><%= technicien.getNom() %></a></td>
+                        <td><a href="/specialiteTechnicien/liste/<%= technicien.getId() %>"><%= technicien.getPrenom() %></a></td>
+                        <td><%= technicien.getDateNaissance() %></td>
+                        <td><%= technicien.getGenre().getLibelle() %></td>7
+                        <td><%= technicien.getEmail() %></td>
+                        <td><%= technicien.getMotDePasse() %></td>
                         <td>
-                            <a href="/techniciens/edit/<%= client.getId() %>" class="btn btn-sm btn-warning">Modifier</a>
-                            <a href="/techniciens/delete/<%= client.getId() %>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="/techniciens/edit/<%= technicien.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/techniciens/delete/<%= technicien.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
+                            <a href="/specialiteTechnicien/create/<%= technicien.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
                         </td>
                     </tr>
                 <% 

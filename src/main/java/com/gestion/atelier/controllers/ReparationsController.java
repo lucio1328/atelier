@@ -78,6 +78,10 @@ public class ReparationsController {
                                     @RequestParam("ordinateur") String ordinateur,
                                     @RequestParam("statut") String statut) {
         ReparationsDTO reparationsDTO = new ReparationsDTO();
+
+        List<TechniciensDTO> techniciens = techniciensService.getAll();
+        List<StatutDTO> statuts = statutService.getAll();
+        List<OrdinateursDTO> ordinateurs = ordinateursService.getAll();
         try {
             if (description != null && dateDebut != null && technicien != null && ordinateur != null && statut != null) {
                 Long idTech = Long.parseLong(technicien);
@@ -85,7 +89,7 @@ public class ReparationsController {
 
                 Long idOrdinateur = Long.parseLong(ordinateur);
                 OrdinateursDTO ordinateurDTO = ordinateursService.getById(idOrdinateur);
-
+                
                 ClientsDTO clientDTO = clientsService.getById(ordinateurDTO.getClient().getId());
 
                 Long idStatut = Long.parseLong(statut);
@@ -98,9 +102,9 @@ public class ReparationsController {
                 reparationsDTO.setTechnicien(technicienDTO);
                 reparationsDTO.setOrdinateur(ordinateurDTO);
                 reparationsDTO.setStatut(statuDTO);
-                reparationsDTO.setClient(clientDTO);              
-            }
+                reparationsDTO.setClient(clientDTO);
 
+            }
             reparationsService.createReparation(reparationsDTO);
             return new ModelAndView("redirect:/reparations/liste");
         } 
@@ -109,7 +113,10 @@ public class ReparationsController {
             mav.addObject("view", "reparations/form.jsp");
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
             mav.addObject("reparation", reparationsDTO);
-            mav.addObject("action", "create");
+            mav.addObject("techniciens", techniciens);
+            mav.addObject("statuts", statuts);
+            mav.addObject("ordinateurs", ordinateurs);
+
             return mav;
         }
     }
@@ -152,6 +159,10 @@ public class ReparationsController {
                                     @RequestParam("ordinateur") String ordinateur,
                                     @RequestParam("statut") String statut) throws Exception {
         ReparationsDTO reparationsDTO = new ReparationsDTO();
+
+        List<TechniciensDTO> techniciens = techniciensService.getAll();
+        List<StatutDTO> statuts = statutService.getAll();
+        List<OrdinateursDTO> ordinateurs = ordinateursService.getAll();
         if (id != null) {
             reparationsDTO = reparationsService.getById(id);
         }
@@ -189,6 +200,9 @@ public class ReparationsController {
             mav.addObject("view", "reparations/form.jsp");
             mav.addObject("error", "Erreur lors de la mise à jour : " + e.getMessage());
             mav.addObject("reparation", reparationsDTO);
+            mav.addObject("techniciens", techniciens);
+            mav.addObject("statuts", statuts);
+            mav.addObject("ordinateurs", ordinateurs);
             mav.addObject("action", "edit");
             return mav;
         }
