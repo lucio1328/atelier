@@ -112,7 +112,26 @@
                     </ul>
                 </li><!-- End Modèles Nav -->
 
-                <!-- Section Modèles -->
+                <!-- Section Ordinateurs -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#ordinateurs-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-arrow-down-circle"></i><span>Ordinateurs</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="ordinateurs-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/ordinateurs/create">
+                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ordinateurs/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li><!-- End Ordinateurs Nav -->
+
+                <!-- Section Specialites -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#specialites-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-arrow-down-circle"></i><span>Specialites</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -129,7 +148,7 @@
                             </a>
                         </li>
                     </ul>
-                </li><!-- End Modèles Nav -->
+                </li><!-- End Specialites Nav -->
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#piece-nav" data-bs-toggle="collapse" href="#">
