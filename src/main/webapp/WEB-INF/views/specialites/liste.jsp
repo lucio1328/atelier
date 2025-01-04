@@ -26,9 +26,9 @@
                             <td><%= specialite.getId() %></td>
                             <td><%= specialite.getLibelle() %></td>
                             <td>
-                                <a href="<%= "/specialites/edit/" + specialite.getId() %>" class="btn btn-sm btn-warning">Modifier</a> |
-                                <a href="<%= "/specialites/delete/" + specialite.getId() %>" class="btn btn-sm btn-danger" 
-                                    onclick="return confirm('Voulez-vous vraiment supprimer cette spécialité ?')">Supprimer</a>
+                                <a href="<%= "/specialites/edit/" + specialite.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a> |
+                                <a href="<%= "/specialites/delete/" + specialite.getId() %>" class="bi bi-trash" style="color: red;" 
+                                    onclick="return confirm('Voulez-vous vraiment supprimer cette spécialité ?')"></a>
                             </td>
                         </tr>
                     <% } 

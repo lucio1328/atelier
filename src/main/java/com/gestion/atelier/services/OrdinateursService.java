@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestion.atelier.DTO.OrdinateursDTO;
+import com.gestion.atelier.mappers.ClientsMapper;
+import com.gestion.atelier.mappers.ModelesMapper;
 import com.gestion.atelier.mappers.OrdinateursMapper;
 import com.gestion.atelier.repository.OrdinateursRepository;
 import com.gestion.atelier.models.Ordinateurs;
@@ -18,6 +20,8 @@ public class OrdinateursService {
     private OrdinateursRepository ordinateursRepository;
 
     private final OrdinateursMapper ordinateursMapper = OrdinateursMapper.INSTANCE;
+    private final ClientsMapper clientsMapper = ClientsMapper.INSTANCE;
+    private final ModelesMapper modelesMapper = ModelesMapper.INSTANCE;
 
     //
     public OrdinateursDTO getById(Long id) throws Exception {
@@ -49,11 +53,16 @@ public class OrdinateursService {
         if (existingOrdinateur == null) {
             throw new Exception("Ordinateur introuvable pour la mise à jour");
         }
-        Ordinateurs ordinateurToUpdate = ordinateursMapper.ordinateursDTOToOrdinateurs(ordinateursDTO);
-        Ordinateurs updatedOrdinateur = ordinateursRepository.save(ordinateurToUpdate);
-
+    
+        existingOrdinateur.setNumeroSerie(ordinateursDTO.getNumeroSerie());
+        existingOrdinateur.setDescription(ordinateursDTO.getDescription());
+        existingOrdinateur.setClient(clientsMapper.clientsDTOToClients(ordinateursDTO.getClient()));
+        existingOrdinateur.setModele(modelesMapper.modelesDTOToModeles(ordinateursDTO.getModele()));
+    
+        Ordinateurs updatedOrdinateur = ordinateursRepository.save(existingOrdinateur);
+    
         return ordinateursMapper.ordinateursToOrdinateursDTO(updatedOrdinateur);
-    }
+    }    
 
     //
     public void deleteOrdinateur(Long id) throws Exception {

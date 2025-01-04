@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gestion.atelier.DTO.AdminsDTO;
 import com.gestion.atelier.DTO.GenreDTO;
-import com.gestion.atelier.models.Admins;
 import com.gestion.atelier.services.AdminsService;
 import com.gestion.atelier.services.GenreService;
 import com.gestion.atelier.utils.PasswordUtil;
@@ -38,7 +37,7 @@ public class ConnectionController {
         ModelAndView mav = new ModelAndView("index");
 
         try {
-            Admins admin = adminsService.verification(email, mdp);
+            AdminsDTO admin = adminsService.verification(email, mdp);
             if (admin != null) {
                 session.setAttribute("admin", admin);
                 mav.setViewName("accueil");
@@ -70,6 +69,15 @@ public class ConnectionController {
         admin.setMotDePasse(PasswordUtil.hashPassword("admin"));
 
         adminsService.createAdmin(admin);
+
+        return mav;
+    }
+
+    // Méthode pour gérer la déconnexion
+    @GetMapping("/deconnexion")
+    public ModelAndView deconnexion(HttpSession session) {
+        ModelAndView mav = new ModelAndView("index");
+        session.invalidate();
 
         return mav;
     }

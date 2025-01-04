@@ -18,30 +18,30 @@ public class Reparations {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "description", nullable = false)
-    private String description;
-
     @Column(name = "date_debut", nullable = false)
     private Date dateDebut;
 
-    @Column(name = "date_fin", nullable = false)
+    @Column(name = "date_fin")
     private Date dateFin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_technicien")
-    private Techniciens technicien;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_client")
     private Clients client;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ordinateur")
-    private Ordinateurs ordinateur;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_statut")
     private Statut statut;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_technicien")
+    private Techniciens technicien;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_ordinateur")
+    private Ordinateurs ordinateur;
 
     public Long getId() {
         return id;
@@ -97,6 +97,13 @@ public class Reparations {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
+    }
+
+    public Ordinateurs getOrdinateur() {
+        return ordinateur;
+    }
+    public void setOrdinateur(Ordinateurs ordinateur) {
+        this.ordinateur = ordinateur;
     }
 
 }

@@ -1,4 +1,6 @@
+<%@page import="com.gestion.atelier.DTO.AdminsDTO"%>
 <%
+    AdminsDTO admin = (AdminsDTO) session.getAttribute("admin");
     String view = (String) request.getAttribute("view");
     if (view == null) {
         view = "home.jsp";
@@ -58,7 +60,71 @@
 
             <!-- End Search Bar -->
 
+            <nav class="header-nav ms-auto">
+                <ul class="d-flex align-items-center">
+                    <li class="nav-item dropdown pe-3">
 
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"><% if(admin != null) {
+                                out.println(admin.getNom() + " " + admin.getPrenom());
+                            } %>
+                        </span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6><% if(admin != null) {
+                                out.println(admin.getNom() + " " + admin.getPrenom());
+                            } %></h6>
+                            <span>Admin</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Need Help?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/connection/deconnexion">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                    </li><!-- End Profile Nav -->
+
+                </ul>
+            </nav><!-- End Icons Navigation -->
 
         </header><!-- End Header -->
 
@@ -77,7 +143,7 @@
                 <!-- Section Marques -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#marques-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Marques</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-tag"></i><span>Marques</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="marques-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
@@ -96,7 +162,7 @@
                 <!-- Section Modèles -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#modeles-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Modeles</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-box"></i><span>Modeles</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="modeles-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
@@ -112,10 +178,29 @@
                     </ul>
                 </li><!-- End Modèles Nav -->
 
-                <!-- Section Modèles -->
+                <!-- Section Ordinateurs -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#ordinateurs-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-laptop"></i><span>Ordinateurs</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="ordinateurs-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/ordinateurs/create">
+                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ordinateurs/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li><!-- End Ordinateurs Nav -->
+
+                <!-- Section Specialites -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#specialites-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Specialites</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-award"></i><span>Specialites</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="specialites-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
@@ -129,11 +214,11 @@
                             </a>
                         </li>
                     </ul>
-                </li><!-- End Modèles Nav -->
+                </li><!-- End Specialites Nav -->
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#piece-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Composant</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-pc-display"></i><span>Composant</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="piece-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
@@ -156,7 +241,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Client</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-person"></i><span>Client</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="client-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
@@ -174,7 +259,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#technicien-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Technicien</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-wrench"></i><span>Technicien</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="technicien-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
@@ -192,7 +277,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#mvtStock-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Mouvement stock</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-arrow-down-up"></i><span>Mouvement stock</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="mvtStock-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
@@ -205,7 +290,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#reparation-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-arrow-down-circle"></i><span>Reparation</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-gear"></i><span>Reparation</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="reparation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>

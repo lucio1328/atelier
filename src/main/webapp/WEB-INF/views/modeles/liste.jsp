@@ -31,8 +31,8 @@
                         <td><%= modele.getNomModele() %></td>
                         <td><%= modele.getMarque().getNomMarque() %></td>
                         <td>
-                            <a href="/modeles/edit/<%= modele.getId() %>" class="btn btn-sm btn-warning">Modifier</a>
-                            <a href="/modeles/delete/<%= modele.getId() %>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="/modeles/edit/<%= modele.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/modeles/delete/<%= modele.getId() %>" class="bi bi-trash" style="color: red;"></a>
                         </td>
                     </tr>
                 <% 
