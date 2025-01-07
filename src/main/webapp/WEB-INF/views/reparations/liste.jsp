@@ -1,10 +1,38 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="com.gestion.atelier.DTO.ReparationsDTO"%>
+<%@page import="com.gestion.atelier.DTO.*"%>
 <%@page import="java.util.List"%>
+
+<% List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparation"); 
+    List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
+    List<ReparationsDTO> recherche = (List<ReparationsDTO>) request.getAttribute("recherche");
+%>
 
 <section class="section">
     <div class="row">
     <div class="col-lg-12">
+
+         <div class="card">
+        <div class="card-body">
+             <div class="mb-3">
+                <form action="/reparations/recherche" method="post">
+                        <label for="typeReparation" class="form-label">Type de reparation :</label>
+                        <select id="typeReparation" name="typeReparation" class="form-control" required>
+                            <option value="">Sélectionner un type</option>
+                            <% 
+                                for (TypeReparationDTO typeReparation : typeReparations) {
+                            %>
+                                <option value="<%= typeReparation.getId() %>">
+                                    <%= typeReparation.getLibelle() %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        OK
+                    </button>
+                </form>
+        </div>
+        </div>
 
         <div class="card">
         <div class="card-body">
@@ -27,7 +55,6 @@
             </thead>
             <tbody>
                 <% 
-                    List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
                     if (reparations != null && !reparations.isEmpty()) {
                         for (ReparationsDTO reparation : reparations) {
                 %>
@@ -48,7 +75,29 @@
                     </tr>
                 <% 
                         }
-                    } %>
+                    }
+                    else if(recherche != null) {
+                    for (ReparationsDTO r : recherche) {
+                %>
+                <tr>
+                    <td><%= r.getId() %></td>
+                    <td><%= r.getDescription() %></td>
+                    <td><%= r.getDateDebut() %></td>
+                    <td><%= r.getDateFin() %></td>
+                    <td><%= r.getTechnicien().getNom() %> <%= r.getTechnicien().getPrenom() %></td>
+                    <td><%= r.getClient().getNom() %> <%= r.getClient().getPrenom() %></td>
+                    <td><%= r.getOrdinateur().getNumeroSerie() %></td>
+                    <td><%= r.getStatut().getLibelle() %></td>
+                    <td>
+                        <a href="/reparations/edit/<%= r.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                        <a href="/reparations/delete/<%= r.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
+                        <a href="/reparationPieces/create/<%= r.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
+                    </td>
+                </tr>
+
+                <%
+                        }}
+                %>
             </tbody>
             </table>
             <!-- End Table with stripped rows -->
