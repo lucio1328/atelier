@@ -26,6 +26,15 @@ public class ReparationPieces {
     @Column(name = "quantite", nullable = false)
     private Integer quantite;
 
+    public ReparationPieces() {
+    }
+
+    public ReparationPieces(PiecesDetachees pieceDetachee, Reparations reparation, Integer quantite) {
+        this.pieceDetachee = pieceDetachee;
+        this.reparation = reparation;
+        this.quantite = quantite;
+    }
+
     public PiecesDetachees getPieceDetachee() {
         return pieceDetachee;
     }

@@ -16,4 +16,7 @@ public interface AchatPiecesRepository extends JpaRepository<AchatPieces, Long> 
 
     @Query("SELECT a FROM AchatPieces a LEFT JOIN FETCH a.pieceDetachee")
     List<AchatPieces> getAll();
+
+    @Query("SELECT a FROM AchatPieces a LEFT JOIN FETCH a.pieceDetachee p WHERE p.id = :pieceDetachee and a.quantite_disponible > 0")
+    List<AchatPieces> findByPieceDetachee(Long pieceDetachee);
 }

@@ -16,4 +16,7 @@ public interface ClientsRepository extends JpaRepository<Clients, Long> {
 
     @Query("SELECT c FROM Clients c JOIN FETCH c.genre")
     List<Clients> getAll();
+
+    @Query("SELECT c FROM Clients c JOIN FETCH c.genre where c.nom like %:nom% and c.prenom like %:prenom% ")
+    List<Clients> getByNom(String nom, String prenom);
 }
