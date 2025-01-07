@@ -8,6 +8,7 @@ import com.gestion.atelier.mappers.ClientsMapper;
 import com.gestion.atelier.repository.ClientsRepository;
 import com.gestion.atelier.models.Clients;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,14 @@ public class ClientsService {
     private ClientsRepository clientsRepository;
 
     private final ClientsMapper clientsMapper = ClientsMapper.INSTANCE;
+
+    //
+    public List<ClientsDTO> rechercheMultiCriteres(String nom, String prenom, Date dateDebut, Date dateFin) {
+        List<Clients> clients = clientsRepository.searchClients(nom, prenom, dateDebut, dateFin);
+        return clients.stream()
+                .map(clientsMapper::clientsToClientsDTO)
+                .collect(Collectors.toList());
+    }
 
     //
     public ClientsDTO getById(Long id) throws Exception {

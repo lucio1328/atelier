@@ -26,6 +26,33 @@ public class ClientsController {
     @Autowired
     private GenreService genreService;
 
+    // Recherche multi-criteres
+    @PostMapping("/recherche")
+    public  ModelAndView rechercheMultiCriteres(@RequestParam("nom") String nom,
+                                                @RequestParam("prenom") String prenom,
+                                                @RequestParam("dateDebut") String dateDebut,
+                                                @RequestParam("dateFin") String dateFin) {
+        ModelAndView mav = new ModelAndView("accueil");
+
+        try {
+            Date dateD = Date.valueOf(dateDebut);
+            Date dateF = Date.valueOf(dateFin);
+
+            List<ClientsDTO> clients = clientsService.rechercheMultiCriteres(nom, prenom, dateD, dateF);
+
+            mav.addObject("view", "clients/liste.jsp");
+            mav.addObject("rechercheClients", clients);
+            return mav;
+        }
+        catch (Exception e) {
+            ModelAndView mav2 = new ModelAndView("accueil");
+            mav2.addObject("view", "clients/liste.jsp");
+            mav2.addObject("erreur", e.getMessage());
+            return mav2;
+        }
+    }
+
+
     // Afficher la liste des clients
     @GetMapping("/liste")
     public ModelAndView getAllClients() {

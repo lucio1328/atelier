@@ -1,5 +1,6 @@
 package com.gestion.atelier.services;
 
+import com.gestion.atelier.models.PiecesDetachees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +56,9 @@ public class AchatPiecesService {
     //
     public void deleteAchatPiece(Long id) {
         achatPiecesRepository.deleteById(id);
+    }
+
+    public List<AchatPieces> getAchatsByPiece(Long pieceId) {
+        return achatPiecesRepository.findByPieceDetachee(pieceId);
     }
 }

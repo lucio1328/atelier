@@ -13,3 +13,7 @@ insert into genre(libelle) values ('Homme'),
 insert into statut(libelle) values ('En attente'),
 ('En cours'),
 ('Termine');
+
+-- type mouvement
+insert into type_mouvement(libelle) values ('Entree'),
+('Sortie');

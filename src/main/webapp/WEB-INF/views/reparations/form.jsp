@@ -5,6 +5,7 @@
     List<StatutDTO> statuts = (List<StatutDTO>) request.getAttribute("statuts");
     List<OrdinateursDTO> ordinateurs = (List<OrdinateursDTO>) request.getAttribute("ordinateurs");
     List<TechniciensDTO> techniciens = (List<TechniciensDTO>) request.getAttribute("techniciens");
+    List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparation");
     ReparationsDTO reparation = (ReparationsDTO) request.getAttribute("reparation");
 %>
 <!DOCTYPE html>
@@ -93,6 +94,20 @@
                             %>
                                 <option value="<%= ordinateur.getId() %>" <%= (reparation != null && reparation.getOrdinateur().getId().equals(ordinateur.getId())) ? "selected" : "" %> >
                                     <%= ordinateur.getNumeroSerie() %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="typeReparation" class="form-label">Type de reparation :</label>
+                        <select id="typeReparation" name="typeReparation" class="form-control" required>
+                            <option value="">Sélectionner un type</option>
+                            <% 
+                                for (TypeReparationDTO typeReparation : typeReparations) {
+                            %>
+                                <option value="<%= typeReparation.getId() %>" <%= (reparation != null && reparation.getTypeReparation().getId().equals(typeReparation.getId())) ? "selected" : "" %> >
+                                    <%= typeReparation.getLibelle() %>
                                 </option>
                             <% } %>
                         </select>
