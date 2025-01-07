@@ -100,7 +100,6 @@ public class OrdinateursController {
             List<ClientsDTO> clients = clientsService.getAll();
     
             modelAndView.addObject("view", "ordinateurs/form.jsp");
-            modelAndView.addObject("action", "create");
             modelAndView.addObject("ordinateur", ordinateursDTO);
             modelAndView.addObject("modeles", modeles);
             modelAndView.addObject("clients", clients);

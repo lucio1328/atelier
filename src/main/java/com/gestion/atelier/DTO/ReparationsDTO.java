@@ -12,9 +12,10 @@ public class ReparationsDTO {
     private StatutDTO statut;
     private TechniciensDTO technicien;
     private OrdinateursDTO ordinateur;
-    
+    private TypeReparationDTO typeReparation;
+   
     public ReparationsDTO(Long id, Date dateDebut, Date dateFin, String description, ClientsDTO client,
-            StatutDTO statut, TechniciensDTO technicien, OrdinateursDTO ordinateur) {
+            StatutDTO statut, TechniciensDTO technicien, OrdinateursDTO ordinateur , TypeReparationDTO typeReparation) {
         this.id = id;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
@@ -23,6 +24,7 @@ public class ReparationsDTO {
         this.statut = statut;
         this.technicien = technicien;
         this.ordinateur = ordinateur;
+        this.typeReparation = typeReparation;
     }
 
     public ReparationsDTO() {
@@ -76,6 +78,15 @@ public class ReparationsDTO {
     public void setStatut(StatutDTO statut) {
         this.statut = statut;
     }
+
+    public TypeReparationDTO getTypeReparation() {
+        return typeReparation;
+    }
+
+    public void setTypeReparation(TypeReparationDTO typeReparationDTO) {
+        this.typeReparation = typeReparationDTO;
+    }
+    
 
 }
 

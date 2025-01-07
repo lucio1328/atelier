@@ -43,6 +43,18 @@ public class Reparations {
     @JoinColumn(name = "id_ordinateur")
     private Ordinateurs ordinateur;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_type_reparation")
+    private TypeReparation typeReparation;
+
+    public TypeReparation getTypeReparation() {
+        return typeReparation;
+    }
+
+    public void setTypeReparation(TypeReparation typeReparation) {
+        this.typeReparation = typeReparation;
+    }
+
     public Long getId() {
         return id;
     }

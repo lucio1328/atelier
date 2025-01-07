@@ -17,11 +17,15 @@ import com.gestion.atelier.DTO.OrdinateursDTO;
 import com.gestion.atelier.DTO.ReparationsDTO;
 import com.gestion.atelier.DTO.StatutDTO;
 import com.gestion.atelier.DTO.TechniciensDTO;
+import com.gestion.atelier.DTO.TypeReparationDTO;
+import com.gestion.atelier.mappers.TypeReparationMapper;
+import com.gestion.atelier.repository.TypeReparationRepository;
 import com.gestion.atelier.services.ClientsService;
 import com.gestion.atelier.services.OrdinateursService;
 import com.gestion.atelier.services.ReparationsService;
 import com.gestion.atelier.services.StatutService;
 import com.gestion.atelier.services.TechniciensService;
+import com.gestion.atelier.services.TypeReparationService;
 
 @Controller
 @RequestMapping("/reparations")
@@ -41,15 +45,42 @@ public class ReparationsController {
     @Autowired
     private StatutService statutService;
 
+    @Autowired
+    private TypeReparationService typeReparationService;
+
+    private final TypeReparationMapper typeReparationMapper  = TypeReparationMapper.INSTANCE;
+
     // Afficher la liste des reparations
     @GetMapping("/liste")
     public ModelAndView getAllReparations() {
         ModelAndView modelAndView = new ModelAndView("accueil");
         List<ReparationsDTO> reparations = reparationsService.getAll();
+        List<TypeReparationDTO> typeReparation = typeReparationService.getAll();
 
         modelAndView.addObject("view", "reparations/liste.jsp");
         modelAndView.addObject("reparations", reparations);
+        modelAndView.addObject("typeReparation", typeReparation);
         return modelAndView;
+    }
+
+    @PostMapping("/recherche")
+    public ModelAndView recherche(@RequestParam("typeReparation") String typeReparation){
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        try {
+
+            List<ReparationsDTO> reparations = reparationsService.getByType(typeReparation);
+            List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
+
+            modelAndView.addObject("typeReparation", typeReparations);
+            modelAndView.addObject("view", "reparations/liste.jsp");
+            modelAndView.addObject("recherche", reparations);
+            return modelAndView;
+        } 
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return modelAndView;
+
     }
 
     // Afficher le formulaire de création d'une reparation
@@ -60,12 +91,14 @@ public class ReparationsController {
         List<TechniciensDTO> techniciens = techniciensService.getAll();
         List<StatutDTO> statuts = statutService.getAll();
         List<OrdinateursDTO> ordinateurs = ordinateursService.getAll();
+        List<TypeReparationDTO> typeReparation = typeReparationService.getAll();
 
         modelAndView.addObject("view", "reparations/form.jsp");
         modelAndView.addObject("action", "create");
         modelAndView.addObject("techniciens", techniciens);
         modelAndView.addObject("statuts", statuts);
         modelAndView.addObject("ordinateurs", ordinateurs);
+        modelAndView.addObject("typeReparation", typeReparation);
 
         return modelAndView;
     }
@@ -76,14 +109,16 @@ public class ReparationsController {
                                     @RequestParam("dateDebut") String dateDebut,
                                     @RequestParam("technicien") String technicien,
                                     @RequestParam("ordinateur") String ordinateur,
-                                    @RequestParam("statut") String statut) {
+                                    @RequestParam("statut") String statut,
+                                    @RequestParam("typeReparation") String typeReparation) {
         ReparationsDTO reparationsDTO = new ReparationsDTO();
 
         List<TechniciensDTO> techniciens = techniciensService.getAll();
         List<StatutDTO> statuts = statutService.getAll();
         List<OrdinateursDTO> ordinateurs = ordinateursService.getAll();
+        List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
         try {
-            if (description != null && dateDebut != null && technicien != null && ordinateur != null && statut != null) {
+            if (description != null && dateDebut != null && technicien != null && ordinateur != null && statut != null && typeReparation != null) {
                 Long idTech = Long.parseLong(technicien);
                 TechniciensDTO technicienDTO = techniciensService.getById(idTech);
 
@@ -95,6 +130,9 @@ public class ReparationsController {
                 Long idStatut = Long.parseLong(statut);
                 StatutDTO statuDTO = statutService.getById(idStatut);
 
+                Long idTypeReparation = Long.parseLong(typeReparation);
+                TypeReparationDTO typeReparationDTO = typeReparationService.getById(idTypeReparation);
+
                 Date dateD = Date.valueOf(dateDebut);
 
                 reparationsDTO.setDescription(description);
@@ -103,6 +141,9 @@ public class ReparationsController {
                 reparationsDTO.setOrdinateur(ordinateurDTO);
                 reparationsDTO.setStatut(statuDTO);
                 reparationsDTO.setClient(clientDTO);
+                reparationsDTO.setTypeReparation(typeReparationDTO);
+
+                System.out.println("Type reparation11 : " + reparationsDTO.getTypeReparation().getLibelle());
 
             }
             reparationsService.createReparation(reparationsDTO);
@@ -116,6 +157,7 @@ public class ReparationsController {
             mav.addObject("techniciens", techniciens);
             mav.addObject("statuts", statuts);
             mav.addObject("ordinateurs", ordinateurs);
+            mav.addObject("typeReparation", typeReparations);
 
             return mav;
         }
@@ -131,12 +173,14 @@ public class ReparationsController {
             List<TechniciensDTO> techniciens = techniciensService.getAll();
             List<StatutDTO> statuts = statutService.getAll();
             List<OrdinateursDTO> ordinateurs = ordinateursService.getAll();
+            List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
 
             modelAndView.addObject("view", "reparations/form.jsp");
             modelAndView.addObject("techniciens", techniciens);
             modelAndView.addObject("statuts", statuts);
             modelAndView.addObject("ordinateurs", ordinateurs);
             modelAndView.addObject("reparation", reparation);
+            modelAndView.addObject("typeReparation", typeReparations);
 
             return modelAndView;
         } 
@@ -163,6 +207,7 @@ public class ReparationsController {
         List<TechniciensDTO> techniciens = techniciensService.getAll();
         List<StatutDTO> statuts = statutService.getAll();
         List<OrdinateursDTO> ordinateurs = ordinateursService.getAll();
+        List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
         if (id != null) {
             reparationsDTO = reparationsService.getById(id);
         }
@@ -203,6 +248,7 @@ public class ReparationsController {
             mav.addObject("techniciens", techniciens);
             mav.addObject("statuts", statuts);
             mav.addObject("ordinateurs", ordinateurs);
+            mav.addObject("typeReparation", typeReparations);
             mav.addObject("action", "edit");
             return mav;
         }
