@@ -60,6 +60,7 @@
                     <th scope="col">Categorie</th>
                     <th scope="col">Type de reparation</th>
                     <th scope="col">Date Retour</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +75,10 @@
                         <td><%= (retour.getReparations().getOrdinateur().getModele().getCategorie() != null) ? retour.getReparations().getOrdinateur().getModele().getCategorie().getLibelle() : " " %></td>
                         <td><%= retour.getReparations().getTypeReparation().getLibelle() %></td>
                         <td><%= retour.getDateRetour() %></td>
+                        <td>
+                            <a href="/retour/edit/<%= retour.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/retour/delete/<%= retour.getId() %>" class="bi bi-trash" style="color: red;"></a>
+                        </td>
                     </tr>
                 <% 
                         }
@@ -86,6 +91,10 @@
                         <td><%= (resultat.getReparations().getOrdinateur().getModele().getCategorie() != null) ? resultat.getReparations().getOrdinateur().getModele().getCategorie().getLibelle() : " " %></td>
                         <td><%= resultat.getReparations().getTypeReparation().getLibelle() %></td>
                         <td><%= resultat.getDateRetour() %></td>
+                        <td>
+                            <a href="/retour/edit/<%= resultat.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
+                            <a href="/retour/delete/<%= resultat.getId() %>" class="bi bi-trash" style="color: red;"></a>
+                        </td>
                     </tr>
                 <% 
                         }} %>

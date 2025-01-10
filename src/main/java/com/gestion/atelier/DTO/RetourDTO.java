@@ -2,8 +2,6 @@ package com.gestion.atelier.DTO;
 
 import java.sql.Date;
 
-import com.gestion.atelier.models.Reparations;
-
 public class RetourDTO {
 
     private Long id;

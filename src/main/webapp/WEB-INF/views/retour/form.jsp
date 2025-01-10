@@ -1,27 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% Long idRep = (Long) request.getAttribute("idRep"); %>
+<%@page import ="com.gestion.atelier.DTO.*"%>
+<% 
+    Long idRep = (Long) request.getAttribute("idRep"); 
+    RetourDTO retour = (RetourDTO) request.getAttribute("retour");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Creation de retours</title>
+    <title><%= ("create".equals(request.getAttribute("action"))) ? "Creation de retours" : "Modification de retours" %></title>
 </head>
 <body class="bg-light">
     <div class="container mt-5">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
                 <h1 class="h3 mb-0">
-                    Creation de retours
+                    <%= ("create".equals(request.getAttribute("action"))) ? "Creation de retours" : "Modification de retours" %>
                 </h1>
             </div>
 
-            <form action="/retour/create" method="post">
+            <% 
+                String errorMessage = (String) request.getAttribute("error");
+                if (errorMessage != null) {
+            %>
+                <div class="alert alert-danger">
+                    <%= errorMessage %>
+                </div>
+            <% } %>
+
+            <form action="<% if("create".equals(request.getAttribute("action"))){
+                    out.println("/retour/create");
+                } 
+                else {
+                    out.println("/retour/edit/" + retour.getId());
+                }%>" method="post">
             <div class="mb-3">
 
                 <input 
                     type="hidden" 
                     id="idReparation" 
                     name="idReparation" 
-                    value="<%= idRep %>"
+                    value="<%= (retour != null) ? retour.getReparations().getId() : idRep %>"
                 >
             </div>
             <div class="mb-3">
@@ -30,11 +48,12 @@
                     type="date" 
                     id="dateRetour" 
                     name="dateRetour" 
-                    class="form-control"  
+                    class="form-control" 
+                    value="<%= (retour != null) ? retour.getDateRetour() : "" %>" 
                 >
             </div>
             <button type="submit" class="btn btn-primary">
-                Creer
+                <%= ("create".equals(request.getAttribute("action"))) ? "Créer" : "Modifier" %>
             </button>
             </form>
         </div>

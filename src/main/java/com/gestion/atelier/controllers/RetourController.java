@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,6 +76,63 @@ public class RetourController {
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
             mav.addObject("retour", retourDTO);
             mav.addObject("action", "create");
+            return mav;
+        }
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView editRetourForm(@PathVariable("id") Long idRetour) {
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        try{
+            RetourDTO retourDTO = retourService.getById(idRetour);
+            modelAndView.addObject("view", "retour/form.jsp");
+            modelAndView.addObject("retour", retourDTO);
+        } catch (Exception e){
+
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView updateRetour(@PathVariable("id") Long idRetour,
+                                    @RequestParam("idReparation") String idReparation,
+                                    @RequestParam("dateRetour") String dateRetour) {
+        RetourDTO retourDTO = new RetourDTO();
+        try {
+
+            if (idReparation != null && dateRetour != null) {
+                Date dateR = Date.valueOf(dateRetour);
+                Long idRep = Long.parseLong(idReparation);
+
+                ReparationsDTO reparationsDTO = reparationsService.getById(idRep);
+
+                retourDTO.setDateRetour(dateR);
+                retourDTO.setReparations(reparationsDTO);
+            }
+        
+            retourService.updateRetour(idRetour, retourDTO);
+            return new ModelAndView("redirect:/retour/liste");
+        } 
+        catch (Exception e) {
+            ModelAndView mav = new ModelAndView("accueil");
+            mav.addObject("view", "retour/form.jsp");
+            mav.addObject("error", "Erreur lors de la modification : " + e.getMessage());
+            mav.addObject("retour", retourDTO);
+            return mav;
+        }
+    }
+
+    // Supprimer retour
+    @GetMapping("/delete/{id}")
+    public ModelAndView deleteRetour(@PathVariable Long id) {
+        try {
+            retourService.deleteRetour(id);
+            return new ModelAndView("redirect:/retour/liste");
+        } 
+        catch (Exception e) {
+            ModelAndView mav = new ModelAndView("accueil");
+            mav.addObject("view", "error");
+            mav.addObject("message", "Erreur lors de la suppression : " + e.getMessage());
             return mav;
         }
     }
