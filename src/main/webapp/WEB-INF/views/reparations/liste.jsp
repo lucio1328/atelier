@@ -51,6 +51,7 @@
                     <th scope="col">Ordinateur</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Actions</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +73,9 @@
                             <a href="/reparations/delete/<%= reparation.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
                             <a href="/reparationPieces/create/<%= reparation.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
                         </td>
+                        <td>
+                            <a href="/retour/create?idReparation=<%= reparation.getId() %>"><span>Livrer</span></a>
+                        </td>
                     </tr>
                 <% 
                         }
@@ -92,6 +96,9 @@
                         <a href="/reparations/edit/<%= r.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
                         <a href="/reparations/delete/<%= r.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
                         <a href="/reparationPieces/create/<%= r.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
+                    </td>
+                    <td>
+                        <a href="/retour/create?idReparation=<%= r.getId() %>"><span>Livrer</span></a>
                     </td>
                 </tr>
 

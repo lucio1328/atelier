@@ -48,8 +48,6 @@ public class ReparationsController {
     @Autowired
     private TypeReparationService typeReparationService;
 
-    private final TypeReparationMapper typeReparationMapper  = TypeReparationMapper.INSTANCE;
-
     // Afficher la liste des reparations
     @GetMapping("/liste")
     public ModelAndView getAllReparations() {
@@ -142,8 +140,6 @@ public class ReparationsController {
                 reparationsDTO.setStatut(statuDTO);
                 reparationsDTO.setClient(clientDTO);
                 reparationsDTO.setTypeReparation(typeReparationDTO);
-
-                System.out.println("Type reparation11 : " + reparationsDTO.getTypeReparation().getLibelle());
 
             }
             reparationsService.createReparation(reparationsDTO);
