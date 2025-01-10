@@ -65,6 +65,7 @@ public class RetourService {
             throw new Exception("Retour introuvable pour la mise à jour");
         }
         Retour retour = retourMapper.retourDTOToRetour(retoursDTO);
+        retour.setId(id);
         Retour updatedRetour = retourRepository.save(retour);
 
         return retourMapper.retourToRetourDTO(updatedRetour);
