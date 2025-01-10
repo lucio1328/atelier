@@ -294,6 +294,19 @@
                 </li><!-- End Technicien Nav -->
 
                 <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#retour-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-wrench"></i><span>Retour</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="retour-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/retour/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li><!-- End Retour Nav -->
+
+                <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#mvtStock-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-arrow-down-up"></i><span>Mouvement stock</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
