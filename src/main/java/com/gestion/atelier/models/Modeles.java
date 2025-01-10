@@ -8,11 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "modeles", uniqueConstraints = @UniqueConstraint(columnNames = {"nom_modele", "id_marque"}))
 public class Modeles {
 
     @Id
@@ -26,6 +23,18 @@ public class Modeles {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_marque", nullable = false)
     private Marques marque;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categorie", nullable = false)
+    private Categories categorie;
+
+    public Categories getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categories categorie) {
+        this.categorie = categorie;
+    }
 
     public Modeles(Long id, String nomModele, Marques marque) {
         this.id = id;
