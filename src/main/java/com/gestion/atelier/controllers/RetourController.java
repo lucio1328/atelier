@@ -74,7 +74,7 @@ public class RetourController {
             ModelAndView mav = new ModelAndView("accueil");
             mav.addObject("view", "retour/form.jsp");
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
-            mav.addObject("retour", retourDTO);
+            mav.addObject("idRep", Long.parseLong(idReparation));
             mav.addObject("action", "create");
             return mav;
         }

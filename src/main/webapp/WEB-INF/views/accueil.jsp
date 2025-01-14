@@ -337,6 +337,24 @@
                     </ul>
                 </li><!-- End Reparation Nav -->
 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#recommande-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-gear"></i><span>Recommande</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="recommande-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/recommandes/create">
+                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/recommandes/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
 
         </aside><!-- End Sidebar -->
