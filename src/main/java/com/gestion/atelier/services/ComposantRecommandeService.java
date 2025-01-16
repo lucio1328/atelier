@@ -44,7 +44,7 @@ public class ComposantRecommandeService {
                               .collect(Collectors.toList());
     }
 
-    public List<ComposantRecommandeDTO> getComposantRecommandeByDate(Integer mois, Integer annee) {
+    public List<ComposantRecommandeDTO> getComposantRecommandeByDate(String mois, String annee) {
         List<ComposantRecommande> composantRecommandeList = composantRecommandeRepository.getComposantRecommandeByDate(mois,annee);
         return composantRecommandeList.stream()
                               .map(composantRecommandeMapper::composantRecommandeToComposantRecommandeDTO)

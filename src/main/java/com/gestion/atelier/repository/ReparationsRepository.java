@@ -33,4 +33,9 @@ public interface ReparationsRepository extends JpaRepository<Reparations, Long> 
 
     List<Reparations> findByTypeReparation(TypeReparation type);
 
+    @Query("SELECT r FROM Reparations r LEFT JOIN FETCH r.technicien t LEFT JOIN FETCH r.client c LEFT JOIN FETCH r.ordinateur ordi LEFT JOIN FETCH r.statut s LEFT JOIN FETCH r.typeReparation rep WHERE r.dateDebut = CURRENT_DATE")
+    List<Reparations> getByDate();
+
+    @Query("SELECT r FROM Reparations r LEFT JOIN FETCH r.technicien t LEFT JOIN FETCH r.client c LEFT JOIN FETCH r.ordinateur ordi LEFT JOIN FETCH r.statut s LEFT JOIN FETCH r.typeReparation rep WHERE r.dateDebut = :date")
+    List<Reparations> getByDate(Date date);
 }

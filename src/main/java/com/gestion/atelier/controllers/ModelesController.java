@@ -2,8 +2,10 @@ package com.gestion.atelier.controllers;
 
 import com.gestion.atelier.DTO.ModelesDTO;
 import com.gestion.atelier.DTO.MarquesDTO;
+import com.gestion.atelier.DTO.CategoriesDTO;
 import com.gestion.atelier.services.ModelesService;
 import com.gestion.atelier.services.MarquesService;
+import com.gestion.atelier.services.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ public class ModelesController {
     @Autowired
     private MarquesService marquesService;
 
+    @Autowired
+    private CategoriesService categoriesService;
+
     // Afficher la liste des modèles
     @GetMapping("/liste")
     public ModelAndView getAllModeles() {
@@ -37,24 +42,28 @@ public class ModelesController {
     public ModelAndView createModeleForm() {
         ModelAndView modelAndView = new ModelAndView("accueil");
         List<MarquesDTO> marques = marquesService.getAll();
+        List<CategoriesDTO> categories = categoriesService.getAllCategories();
 
         modelAndView.addObject("view", "modeles/form.jsp");
         modelAndView.addObject("action", "create");
         modelAndView.addObject("marques", marques);
+        modelAndView.addObject("categories", categories);
         return modelAndView;
     }
 
     // Créer un nouveau modèle
     @PostMapping("/create")
-    public ModelAndView createModele(@RequestParam("nomModele") String nomModele, @RequestParam("marque") String marqueId) {
+    public ModelAndView createModele(@RequestParam("nomModele") String nomModele, @RequestParam("marque") String marqueId, @RequestParam("categorie") String idCat) {
         ModelesDTO modelesDTO = new ModelesDTO();
         try {
             if (marqueId != null && !marqueId.isEmpty() && nomModele != null) {
                 Long id = Long.parseLong(marqueId);
                 MarquesDTO selectedMarque = marquesService.getById(id);
+                CategoriesDTO selectedCategory = categoriesService.getCategorieById(Long.parseLong(idCat));
 
                 modelesDTO.setNomModele(nomModele);
                 modelesDTO.setMarque(selectedMarque);
+                modelesDTO.setCategorie(selectedCategory);
             }
 
             modelesService.createModele(modelesDTO);
@@ -78,10 +87,13 @@ public class ModelesController {
         try {
             ModelesDTO modele = modelesService.getById(id);
             List<MarquesDTO> marques = marquesService.getAll();
+            List<CategoriesDTO> categories = categoriesService.getAllCategories();
 
             modelAndView.addObject("view", "modeles/form.jsp");
             modelAndView.addObject("marques", marques);
             modelAndView.addObject("modele", modele);
+            modelAndView.addObject("categories", categories);
+
             return modelAndView;
         } 
         catch (Exception e) {
@@ -98,7 +110,8 @@ public class ModelesController {
     @PostMapping("/edit/{id}")
     public ModelAndView editModele(@PathVariable Long id, 
                                 @RequestParam("nomModele") String nomModele, 
-                                @RequestParam("marque") String marqueId) {
+                                @RequestParam("marque") String marqueId,
+                                @RequestParam("categorie") String idCate) {
                                     
         ModelesDTO modelesDTO = new ModelesDTO();
         try {
@@ -111,7 +124,9 @@ public class ModelesController {
             if (marqueId != null && !marqueId.isEmpty()) {
                 Long idMarque = Long.parseLong(marqueId);
                 MarquesDTO selectedMarque = marquesService.getById(idMarque);
+                CategoriesDTO selectedCategory = categoriesService.getCategorieById(Long.parseLong(idCate));
                 modeleExist.setMarque(selectedMarque);
+                modeleExist.setCategorie(selectedCategory);
             }
 
             modelesService.updateModele(id, modeleExist);

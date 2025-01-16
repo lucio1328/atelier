@@ -334,6 +334,11 @@
                                 <i class="bi bi-circle"></i><span>Liste</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/reparations/rechercheClient">
+                                <i class="bi bi-circle"></i><span>Clients</span>
+                            </a>
+                        </li>
                     </ul>
                 </li><!-- End Reparation Nav -->
 

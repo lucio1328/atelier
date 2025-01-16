@@ -11,7 +11,7 @@ import com.gestion.atelier.models.Reparations;
 import com.gestion.atelier.models.TypeReparation;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,6 +103,23 @@ public class ReparationsService {
     //
     public List<ReparationsDTO> getBetweenDate(Date dateDebut, Date dateFin) {
         List<Reparations> reparations = reparationsRepository.getBetweenDate(dateDebut, dateFin);
+        return reparations.stream()
+                          .map(reparationsMapper::reparationsToReparationsDTO)
+                          .collect(Collectors.toList());
+    }
+
+    public List<ReparationsDTO> getByDate() {
+        List<Reparations> reparations = reparationsRepository.getByDate();
+        return reparations.stream()
+                          .map(reparationsMapper::reparationsToReparationsDTO)
+                          .collect(Collectors.toList());
+    }
+
+    public List<ReparationsDTO> getByDate(String date) {
+        List<Reparations> reparations = new ArrayList<>();
+        if(date !=null){
+            reparations = reparationsRepository.getByDate(Date.valueOf(date));
+        }
         return reparations.stream()
                           .map(reparationsMapper::reparationsToReparationsDTO)
                           .collect(Collectors.toList());

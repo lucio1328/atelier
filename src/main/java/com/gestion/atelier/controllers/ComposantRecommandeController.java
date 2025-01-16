@@ -87,7 +87,7 @@ public class ComposantRecommandeController {
         List<Integer> annee = List.of(2020,2021,2022,2023,2024,2025);
 
         mav.addObject("view", "recommande/liste.jsp");
-        mav.addObject("composants", composantRecommandeService.getComposantRecommandeByDate(Integer.parseInt(unMois),Integer.parseInt(uneAnnee)));
+        mav.addObject("composants", composantRecommandeService.getComposantRecommandeByDate(unMois,uneAnnee));
 
         mav.addObject("mois", mois);
         mav.addObject("annees", annee);

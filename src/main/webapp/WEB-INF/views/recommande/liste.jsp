@@ -16,7 +16,7 @@
         <div class="card-body">
             <form action="/recommandes/recherche" method="post">
                         <label for="mois" class="form-label">Mois :</label>
-                        <select id="mois" name="mois" class="form-control" required>
+                        <select id="mois" name="mois" class="form-control">
                             <option value="">Sélectionner un mois</option>
                             <% 
                                 for (int i=0; i<mois.size(); i++) {
@@ -28,7 +28,7 @@
                         </select>
 
                         <label for="annee" class="form-label">Annee :</label>
-                        <select id="annee" name="annee" class="form-control" required>
+                        <select id="annee" name="annee" class="form-control">
                             <option value="">Sélectionner une annee</option>
                             <% 
                                 for (int j=0; j<annees.size(); j++) {

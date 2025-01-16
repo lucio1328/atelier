@@ -17,6 +17,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Marque</th>
+                    <th scope="col">Categorie</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -30,6 +31,7 @@
                         <td><%= modele.getId() %></td>
                         <td><%= modele.getNomModele() %></td>
                         <td><%= modele.getMarque().getNomMarque() %></td>
+                        <td><%= modele.getCategorie().getLibelle() %></td>
                         <td>
                             <a href="/modeles/edit/<%= modele.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
                             <a href="/modeles/delete/<%= modele.getId() %>" class="bi bi-trash" style="color: red;"></a>

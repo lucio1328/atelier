@@ -1,10 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.ModelesDTO"%>
 <%@page import="com.gestion.atelier.DTO.MarquesDTO"%>
+<%@page import="com.gestion.atelier.DTO.CategoriesDTO"%>
 <%@page import="java.util.List"%>
 <%
     ModelesDTO modele = (ModelesDTO) request.getAttribute("modele");
     List<MarquesDTO> marques = (List<MarquesDTO>) request.getAttribute("marques");
+    List<CategoriesDTO> categories = (List<CategoriesDTO>) request.getAttribute("categories");
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -56,6 +59,20 @@
                             %>
                                 <option value="<%= marque.getId() %>" <%= (modele != null && modele.getMarque().getId().equals(marque.getId())) ? "selected" : "" %> >
                                     <%= marque.getNomMarque() %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="categorie" class="form-label">Categorie :</label>
+                        <select id="categorie" name="categorie" class="form-control" required>
+                            <option value="">Sélectionner une categorie</option>
+                            <% 
+                                for (CategoriesDTO categorie : categories) {
+                            %>
+                                <option value="<%= categorie.getId() %>" <%= (modele != null && modele.getCategorie().getId().equals(categorie.getId())) ? "selected" : "" %> >
+                                    <%= categorie.getLibelle() %>
                                 </option>
                             <% } %>
                         </select>

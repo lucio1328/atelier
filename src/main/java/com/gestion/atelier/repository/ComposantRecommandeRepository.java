@@ -21,7 +21,7 @@ public interface ComposantRecommandeRepository extends JpaRepository<ComposantRe
     @Query("SELECT a FROM ComposantRecommande a LEFT JOIN FETCH a.pieceDetachee WHERE EXTRACT(MONTH FROM a.date) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM a.date) = EXTRACT(YEAR FROM CURRENT_DATE)")
     List<ComposantRecommande> getComposantRecommandeByDate();
 
-    @Query("SELECT a FROM ComposantRecommande a LEFT JOIN FETCH a.pieceDetachee WHERE EXTRACT(MONTH FROM a.date) = :mois AND EXTRACT(YEAR FROM a.date) = :annee")
-    List<ComposantRecommande> getComposantRecommandeByDate(Integer mois, Integer annee);
+    @Query("SELECT a FROM ComposantRecommande a LEFT JOIN FETCH a.pieceDetachee WHERE (EXTRACT(MONTH FROM a.date) = :mois) AND (EXTRACT(YEAR FROM a.date) = :annee)")
+    List<ComposantRecommande> getComposantRecommandeByDate(String mois, String annee);
 
 }

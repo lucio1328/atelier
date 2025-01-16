@@ -1,7 +1,7 @@
 package com.gestion.atelier.controllers;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,6 +77,24 @@ public class ReparationsController {
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return modelAndView;
+
+    }
+
+    @PostMapping("/rechercheDate")
+    public ModelAndView rechercheDate(@RequestParam("date") String date){
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        List<ReparationsDTO> reparations = reparationsService.getByDate(date);
+
+        List<ClientsDTO> clients = new ArrayList<>();
+        for (ReparationsDTO reparation : reparations){
+            clients.add(reparation.getClient());
+        }
+
+        modelAndView.addObject("view", "reparations/listeClient.jsp");
+        modelAndView.addObject("reparations", reparations);
+        modelAndView.addObject("clients", clients);
+
         return modelAndView;
 
     }
@@ -262,6 +280,35 @@ public class ReparationsController {
             mav.addObject("message", "Erreur lors de la suppression : " + e.getMessage());
             return mav;
         }
+    }
+
+    @GetMapping("/rechercheClient")
+    public ModelAndView rechercheClient(){
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        List<ReparationsDTO> reparations = reparationsService.getByDate();
+
+        List<ClientsDTO> clients = new ArrayList<>();
+        for (ReparationsDTO reparation : reparations){
+            clients.add(reparation.getClient());
+        }
+
+        modelAndView.addObject("view", "reparations/listeClient.jsp");
+        modelAndView.addObject("reparations", reparations);
+        modelAndView.addObject("clients", clients);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/details/{id}")
+    public ModelAndView details(@PathVariable("id") Long idRep) throws Exception {
+        ModelAndView mav = new ModelAndView("accueil");
+
+        ReparationsDTO reparation = reparationsService.getById(idRep);
+
+        mav.addObject("view", "reparations/details.jsp");
+        mav.addObject("reparation", reparation);
+
+        return mav;
     }
 
 }
