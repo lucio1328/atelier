@@ -11,11 +11,20 @@
             <div class="card-body">
                 <form action="/reparations/rechercheDate" method="post">
                     <div class="mb-3">
-                        <label for="date" class="form-label">Date de reparation:</label>
+                        <label for="dateMin" class="form-label">Date de reparation entre :</label>
                         <input
                             type="date"
-                            id="date"
-                            name="date"
+                            id="dateMin"
+                            name="dateMin"
+                            class="form-control"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateMax" class="form-label">Et:</label>
+                        <input
+                            type="date"
+                            id="dateMax"
+                            name="dateMax"
                             class="form-control"
                         >
                     </div>

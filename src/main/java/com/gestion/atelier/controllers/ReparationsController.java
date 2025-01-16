@@ -18,8 +18,6 @@ import com.gestion.atelier.DTO.ReparationsDTO;
 import com.gestion.atelier.DTO.StatutDTO;
 import com.gestion.atelier.DTO.TechniciensDTO;
 import com.gestion.atelier.DTO.TypeReparationDTO;
-import com.gestion.atelier.mappers.TypeReparationMapper;
-import com.gestion.atelier.repository.TypeReparationRepository;
 import com.gestion.atelier.services.ClientsService;
 import com.gestion.atelier.services.OrdinateursService;
 import com.gestion.atelier.services.ReparationsService;
@@ -48,39 +46,6 @@ public class ReparationsController {
     @Autowired
     private TypeReparationService typeReparationService;
 
-    // Afficher la liste des reparations
-    @GetMapping("/liste")
-    public ModelAndView getAllReparations() {
-        ModelAndView modelAndView = new ModelAndView("accueil");
-        List<ReparationsDTO> reparations = reparationsService.getAll();
-        List<TypeReparationDTO> typeReparation = typeReparationService.getAll();
-
-        modelAndView.addObject("view", "reparations/liste.jsp");
-        modelAndView.addObject("reparations", reparations);
-        modelAndView.addObject("typeReparation", typeReparation);
-        return modelAndView;
-    }
-
-    @PostMapping("/recherche")
-    public ModelAndView recherche(@RequestParam("typeReparation") String typeReparation){
-        ModelAndView modelAndView = new ModelAndView("accueil");
-        try {
-
-            List<ReparationsDTO> reparations = reparationsService.getByType(typeReparation);
-            List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
-
-            modelAndView.addObject("typeReparation", typeReparations);
-            modelAndView.addObject("view", "reparations/liste.jsp");
-            modelAndView.addObject("recherche", reparations);
-            return modelAndView;
-        } 
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return modelAndView;
-
-    }
-
     @PostMapping("/rechercheDate")
     public ModelAndView rechercheDate(@RequestParam("date") String date){
         ModelAndView modelAndView = new ModelAndView("accueil");
@@ -95,6 +60,46 @@ public class ReparationsController {
         modelAndView.addObject("reparations", reparations);
         modelAndView.addObject("clients", clients);
 
+        return modelAndView;
+
+    }
+
+    // Afficher la liste des reparations
+    @GetMapping("/liste")
+    public ModelAndView getAllReparations() {
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        List<ReparationsDTO> reparations = reparationsService.getAll();
+        List<TypeReparationDTO> typeReparation = typeReparationService.getAll();
+
+        modelAndView.addObject("view", "reparations/liste.jsp");
+        modelAndView.addObject("reparations", reparations);
+        modelAndView.addObject("typeReparation", typeReparation);
+        modelAndView.addObject("type", "Tous");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/recherche")
+    public ModelAndView recherche(@RequestParam("typeReparation") String typeReparation){
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        try {
+
+            if (typeReparation != null && typeReparation.equalsIgnoreCase("tous")) {
+                return new ModelAndView("redirect:/reparations/liste");
+            }
+
+            List<ReparationsDTO> reparations = reparationsService.getByType(typeReparation);
+            List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
+
+            modelAndView.addObject("typeReparation", typeReparations);
+            modelAndView.addObject("type", typeReparationService.getById(Long.parseLong(typeReparation)).getLibelle());
+            modelAndView.addObject("view", "reparations/liste.jsp");
+            modelAndView.addObject("reparations", reparations);
+            return modelAndView;
+        } 
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return modelAndView;
 
     }
