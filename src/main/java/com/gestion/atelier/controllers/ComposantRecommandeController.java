@@ -1,7 +1,10 @@
 package com.gestion.atelier.controllers;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,8 +72,13 @@ public class ComposantRecommandeController {
     @GetMapping("/liste")
     public ModelAndView listComposantsRecommandes() {
         ModelAndView mav = new ModelAndView("accueil");
-        List<String> mois = List.of("Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre");
-        List<Integer> annee = List.of(2020,2021,2022,2023,2024,2025);
+        List<String> mois = List.of("janvier", "février", "mars", "avril", "mai", "juin",
+                "juillet", "août", "septembre", "octobre", "novembre", "décembre");
+
+        List<Integer> annee = new ArrayList<>();
+        for(int i = 2010; i < 2026; i++) {
+            annee.add(i);
+        }
         mav.addObject("view", "recommande/liste.jsp");
         mav.addObject("composants", composantRecommandeService.getComposantRecommandeByDate());
         mav.addObject("mois", mois);
@@ -80,19 +88,49 @@ public class ComposantRecommandeController {
 
     @PostMapping("/recherche")
     public ModelAndView recherche(@RequestParam("mois") String unMois,
-                                @RequestParam("annee") String uneAnnee) {
+                                  @RequestParam("annee") String uneAnnee) {
         ModelAndView mav = new ModelAndView("accueil");
-        List<String> mois = List.of("Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre");
 
-        List<Integer> annee = List.of(2020,2021,2022,2023,2024,2025);
+        List<String> mois = List.of("janvier", "février", "mars", "avril", "mai", "juin",
+                "juillet", "août", "septembre", "octobre", "novembre", "décembre");
+
+        List<Integer> annees = new ArrayList<>();
+        for (int i = 2010; i <= 2025; i++) {
+            annees.add(i);
+        }
 
         mav.addObject("view", "recommande/liste.jsp");
-        mav.addObject("composants", composantRecommandeService.getComposantRecommandeByDate(unMois,uneAnnee));
+
+        List<ComposantRecommandeDTO> composants;
+        Map<String, List<ComposantRecommandeDTO>> groupedByMonth = new LinkedHashMap<>();
+
+        for (String moisNom : mois) {
+            groupedByMonth.put(moisNom, new ArrayList<>());
+        }
+
+        String moisParam = (unMois != null && !unMois.isEmpty()) ? unMois : null;
+        String anneeParam = (uneAnnee != null && !uneAnnee.isEmpty()) ? uneAnnee : null;
+
+        if (anneeParam != null && moisParam == null) {
+            composants = composantRecommandeService.getComposantRecommandeByDate(moisParam, anneeParam);
+
+            for (ComposantRecommandeDTO composant : composants) {
+                String monthName = composant.getMonthName();
+                groupedByMonth.computeIfAbsent(monthName, k -> new ArrayList<>()).add(composant);
+            }
+            mav.addObject("groupedByMonth", groupedByMonth);
+        }
+        else {
+            composants = composantRecommandeService.getComposantRecommandeByDate(moisParam, anneeParam);
+            mav.addObject("composants", composants);
+        }
 
         mav.addObject("mois", mois);
-        mav.addObject("annees", annee);
-        mav.addObject("uneAnnee", uneAnnee);
-        mav.addObject("unMois", mois.get(Integer.parseInt(unMois)-1));
+        mav.addObject("annees", annees);
+
+        mav.addObject("unMois", (moisParam != null) ? mois.get(Integer.parseInt(moisParam) - 1) : "");
+        mav.addObject("uneAnnee", (anneeParam != null) ? uneAnnee : "");
+
         return mav;
     }
 }

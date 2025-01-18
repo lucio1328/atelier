@@ -47,9 +47,9 @@ public class ReparationsController {
     private TypeReparationService typeReparationService;
 
     @PostMapping("/rechercheDate")
-    public ModelAndView rechercheDate(@RequestParam("date") String date){
+    public ModelAndView rechercheDate(@RequestParam("dateMin") String dateMin, @RequestParam("dateMax") String dateMax){
         ModelAndView modelAndView = new ModelAndView("accueil");
-        List<ReparationsDTO> reparations = reparationsService.getByDate(date);
+        List<ReparationsDTO> reparations = reparationsService.getBetweenDate(Date.valueOf(dateMin), Date.valueOf(dateMax));
 
         List<ClientsDTO> clients = new ArrayList<>();
         for (ReparationsDTO reparation : reparations){
