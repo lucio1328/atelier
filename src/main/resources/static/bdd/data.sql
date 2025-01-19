@@ -23,4 +23,4 @@ insert into categories(libelle) values ('Gamer'),('Bureau');
 
 insert into type_reparation(libelle) values ('Ecran Vaky');
 
-SELECT * FROM composant_recommande a LEFT JOIN a. WHERE (EXTRACT(MONTH FROM a.date) = 1 OR IS NULL) AND (EXTRACT(YEAR FROM a.date) = 2024 OR IS NULL);
+SELECT r FROM reparations r LEFT JOIN r.techniciens t LEFT JOIN r.client c LEFT JOIN r.ordinateurs ordi LEFT JOIN r.statut s LEFT JOIN r.type_reparation rep WHERE r.date_debut >= '2025-01-16' AND r.date_fin <= 2025-01-16;
