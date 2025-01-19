@@ -49,18 +49,26 @@ public class ReparationsController {
     @PostMapping("/rechercheDate")
     public ModelAndView rechercheDate(@RequestParam("dateMin") String dateMin, @RequestParam("dateMax") String dateMax){
         ModelAndView modelAndView = new ModelAndView("accueil");
-        List<ReparationsDTO> reparations = reparationsService.getBetweenDate(Date.valueOf(dateMin), Date.valueOf(dateMax));
+        try {
+            List<ReparationsDTO> reparations = reparationsService.getBetweenDate(dateMin, dateMax);
 
-        List<ClientsDTO> clients = new ArrayList<>();
-        for (ReparationsDTO reparation : reparations){
-            clients.add(reparation.getClient());
+            List<ClientsDTO> clients = new ArrayList<>();
+            for (ReparationsDTO reparation : reparations){
+                clients.add(reparation.getClient());
+            }
+
+            modelAndView.addObject("view", "reparations/listeClient.jsp");
+            modelAndView.addObject("reparations", reparations);
+            modelAndView.addObject("clients", clients);
+
+            return modelAndView;
+        } 
+        catch (Exception e) {
+            modelAndView.addObject("view", "reparations/listeClient.jsp");
+            modelAndView.addObject("erreur", e.getMessage());
+
+            return modelAndView;
         }
-
-        modelAndView.addObject("view", "reparations/listeClient.jsp");
-        modelAndView.addObject("reparations", reparations);
-        modelAndView.addObject("clients", clients);
-
-        return modelAndView;
 
     }
 

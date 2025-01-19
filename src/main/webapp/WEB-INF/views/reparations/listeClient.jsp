@@ -3,11 +3,15 @@
 <%@page import="java.util.List"%>
 <%
     List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
+    String erreur = (String) request.getAttribute("erreur");
 %>
 <section class="section">
     <div class="row">
     <div class="col-lg-12">
         <div class="card">
+            <div>
+                <span style="color: red"><%= (erreur != null) ? erreur : "" %></span>
+            </div>
             <div class="card-body">
                 <form action="/reparations/rechercheDate" method="post">
                     <div class="mb-3">
