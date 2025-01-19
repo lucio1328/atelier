@@ -1,8 +1,10 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.*"%>
 <%@page import="java.util.List"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 
-<% List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparation"); 
+<% 
+    List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparation"); 
     List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
     List<ReparationsDTO> recherche = (List<ReparationsDTO>) request.getAttribute("recherche");
     String type = (String) request.getAttribute("type");
@@ -50,6 +52,7 @@
                     <th scope="col">Technicien</th>
                     <th scope="col">Client</th>
                     <th scope="col">Ordinateur</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Actions</th>
                     <th scope="col"></th>
@@ -63,11 +66,12 @@
                     <tr>
                         <td><%= reparation.getId() %></td>
                         <td><%= reparation.getDescription() %></td>
-                        <td><%= reparation.getDateDebut() %></td>
-                        <td><%= reparation.getDateFin() %></td>
+                        <td><%= Formater.dateEnLettres(reparation.getDateDebut()) %></td>
+                        <td><%= (reparation.getDateFin() != null) ? Formater.dateEnLettres(reparation.getDateFin()) : null %></td>
                         <td><%= reparation.getTechnicien().getNom() %> <%= reparation.getTechnicien().getPrenom() %></td>
                         <td><%= reparation.getClient().getNom() %> <%= reparation.getClient().getPrenom() %></td>
                         <td><%= reparation.getOrdinateur().getModele().getMarque().getNomMarque() %> <%= reparation.getOrdinateur().getModele().getNomModele() %></td>
+                        <td><%= reparation.getTypeReparation().getLibelle() %></td>
                         <td><%= reparation.getStatut().getLibelle() %></td>
                         <td>
                             <a href="/reparations/edit/<%= reparation.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>

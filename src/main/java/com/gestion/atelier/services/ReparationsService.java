@@ -141,6 +141,7 @@ public class ReparationsService {
             throw new Exception("Réparation introuvable pour la mise à jour");
         }
         Reparations reparationToUpdate = this.correspondance(reparationsDTO);
+        reparationToUpdate.setId(existingReparation.getId());
         Reparations updatedReparation = reparationsRepository.save(reparationToUpdate);
 
         return reparationsMapper.reparationsToReparationsDTO(updatedReparation);

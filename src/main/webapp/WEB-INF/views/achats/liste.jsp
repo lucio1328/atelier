@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.*"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <%@page import="java.util.List"%>
 
 <section class="section">
@@ -34,7 +35,7 @@
                         <td><%= achat.getQuantite() %></td>
                         <td><%= achat.getQuantiteDisponible() %></td>
                         <td><%= achat.getPrixUnitaire() %></td>
-                        <td><%= achat.getDateAchat() %></td>
+                        <td><%= Formater.dateEnLettres(achat.getDateAchat()) %></td>
                         <td><%= achat.getPieceDetachee().getNomPiece() %></td>
                         <td>
                             <a href="/achats/edit/<%= achat.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>

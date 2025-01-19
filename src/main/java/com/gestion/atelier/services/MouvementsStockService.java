@@ -8,7 +8,7 @@ import com.gestion.atelier.mappers.MouvementsStockMapper;
 import com.gestion.atelier.repository.MouvementsStockRepository;
 import com.gestion.atelier.models.MouvementsStock;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

@@ -91,7 +91,6 @@
                     List<ComposantRecommandeDTO> pieces = (List<ComposantRecommandeDTO>) request.getAttribute("composants");
                     if ((unMois == null || unMois.isEmpty()) && uneAnnee != null && !uneAnnee.isEmpty()) {
                         Map<String, List<ComposantRecommandeDTO>> groupedByMonth = (Map<String, List<ComposantRecommandeDTO>>) request.getAttribute("groupedByMonth");
-                        out.println("taille :" + groupedByMonth.size());
                         if (groupedByMonth != null) {
                             for (String month : groupedByMonth.keySet()) {
                         %>

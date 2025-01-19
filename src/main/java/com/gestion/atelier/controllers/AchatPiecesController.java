@@ -56,6 +56,7 @@ public class AchatPiecesController {
                                     @RequestParam("dateAchat") String dateAchat,
                                     @RequestParam("pieceDetachee") String pieceDetachee) {
         AchatPiecesDTO achatPiecesDTO = new AchatPiecesDTO();
+        List<PiecesDetacheesDTO> pieces = piecesDetacheesService.getAll();
         try {
             if (quantite != null && prixUnitaire != null && dateAchat != null && pieceDetachee != null) {
                 Integer quant = Integer.parseInt(quantite);
@@ -81,6 +82,7 @@ public class AchatPiecesController {
             mav.addObject("error", "Erreur lors de la création : " + e.getMessage());
             mav.addObject("achat", achatPiecesDTO);
             mav.addObject("action", "create");
+            mav.addObject("pieces", pieces);
             return mav;
         }
     }

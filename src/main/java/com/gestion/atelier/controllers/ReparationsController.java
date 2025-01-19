@@ -253,7 +253,8 @@ public class ReparationsController {
                 reparationsDTO.setTechnicien(technicienDTO);
                 reparationsDTO.setOrdinateur(ordinateurDTO);
                 reparationsDTO.setStatut(statuDTO);
-                reparationsDTO.setClient(clientDTO);              
+                reparationsDTO.setClient(clientDTO); 
+                System.out.println("Date fin : "+reparationsDTO.getDateFin());             
             }
 
             reparationsService.updateReparation(id, reparationsDTO);
