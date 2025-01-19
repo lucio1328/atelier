@@ -21,8 +21,8 @@ public interface RetourRepository extends JpaRepository<Retour, Long> {
 
     @Query("SELECT r FROM Retour r " +
        "LEFT JOIN FETCH r.reparations rep " +
-       "WHERE rep.ordinateur.modele.categorie.id = :idCat " +
-       "AND rep.typeReparation.id = :idType")
+       "WHERE (:idCat is null or rep.ordinateur.modele.categorie.id = :idCat)" +
+       "AND (:idType is null or rep.typeReparation.id = :idType)")
     List<Retour> getByCategorieTypeReparation(@Param("idCat") Long idCat, @Param("idType") Long idType);
 
 }

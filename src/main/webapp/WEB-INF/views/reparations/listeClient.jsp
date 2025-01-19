@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.*"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <%@page import="java.util.List"%>
 <%
     List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
@@ -69,7 +70,7 @@
                         <td><%= client.getId() %></td>
                         <td><%= client.getNom() %></td>
                         <td><%= client.getPrenom() %></td>
-                        <td><%= client.getDateNaissance() %></td>
+                        <td><%= Formater.dateEnLettres(client.getDateNaissance()) %></td>
                         <td><%= client.getGenre().getLibelle() %></td>
                         <td><%= client.getEmail() %></td>
                         <td><%= client.getTelephone() %></td>

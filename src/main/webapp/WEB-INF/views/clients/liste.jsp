@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.ClientsDTO"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <%@page import="java.util.List"%>
 <%
     List<ClientsDTO> rechercheClients = (List<ClientsDTO>) request.getAttribute("rechercheClients");
@@ -84,7 +85,7 @@
                         <td><%= client.getId() %></td>
                         <td><%= client.getNom() %></td>
                         <td><%= client.getPrenom() %></td>
-                        <td><%= client.getDateNaissance() %></td>
+                        <td><%= Formater.dateEnLettres(client.getDateNaissance()) %></td>
                         <td><%= client.getGenre().getLibelle() %></td>
                         <td><%= client.getEmail() %></td>
                         <td><%= client.getTelephone() %></td>
@@ -103,7 +104,7 @@
                             <td><%= rechercheClient.getId() %></td>
                             <td><%= rechercheClient.getNom() %></td>
                             <td><%= rechercheClient.getPrenom() %></td>
-                            <td><%= rechercheClient.getDateNaissance() %></td>
+                            <td><%= Formater.dateEnLettres(rechercheClient.getDateNaissance()) %></td>
                             <td><%= rechercheClient.getGenre().getLibelle() %></td>
                             <td><%= rechercheClient.getEmail() %></td>
                             <td><%= rechercheClient.getTelephone() %></td>

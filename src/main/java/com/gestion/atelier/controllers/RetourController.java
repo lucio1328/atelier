@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gestion.atelier.DTO.AchatPiecesDTO;
 import com.gestion.atelier.DTO.CategoriesDTO;
 import com.gestion.atelier.DTO.ReparationsDTO;
 import com.gestion.atelier.DTO.RetourDTO;
@@ -158,7 +157,7 @@ public class RetourController {
         ModelAndView modelAndView = new ModelAndView("accueil");
         List<CategoriesDTO> categories = categoriesService.getAllCategories();
         List<TypeReparationDTO> typeReparations = typeReparationService.getAll();
-        List<RetourDTO> retoursRecherche = retourService.getByCategorieTypeReparation(Long.parseLong(categorie),Long.parseLong(typeRep));
+        List<RetourDTO> retoursRecherche = retourService.getByCategorieTypeReparation(categorie, typeRep);
 
         modelAndView.addObject("view", "retour/liste.jsp");
         modelAndView.addObject("categories", categories);
