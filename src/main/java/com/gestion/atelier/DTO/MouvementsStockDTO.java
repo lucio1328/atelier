@@ -1,6 +1,6 @@
 package com.gestion.atelier.DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MouvementsStockDTO {
 
@@ -16,6 +16,14 @@ public class MouvementsStockDTO {
 
     public MouvementsStockDTO(Long id, Integer quantite, Date dateMouvement, AchatPiecesDTO achatPiece, ReparationsDTO reparation, TypeMouvementDTO typeMouvement) {
         this.id = id;
+        this.quantite = quantite;
+        this.dateMouvement = dateMouvement;
+        this.achatPiece = achatPiece;
+        this.reparation = reparation;
+        this.typeMouvement = typeMouvement;
+    }
+
+    public MouvementsStockDTO(Integer quantite, Date dateMouvement, AchatPiecesDTO achatPiece, ReparationsDTO reparation, TypeMouvementDTO typeMouvement) {
         this.quantite = quantite;
         this.dateMouvement = dateMouvement;
         this.achatPiece = achatPiece;

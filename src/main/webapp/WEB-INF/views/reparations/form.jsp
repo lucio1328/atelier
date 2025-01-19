@@ -93,7 +93,7 @@
                                 for (OrdinateursDTO ordinateur : ordinateurs) {
                             %>
                                 <option value="<%= ordinateur.getId() %>" <%= (reparation != null && reparation.getOrdinateur().getId().equals(ordinateur.getId())) ? "selected" : "" %> >
-                                    <%= ordinateur.getNumeroSerie() %>
+                                    <%= ordinateur.getModele().getMarque().getNomMarque() %> <%= ordinateur.getModele().getNomModele() %>
                                 </option>
                             <% } %>
                         </select>

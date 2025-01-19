@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.*"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <%@page import="java.util.List"%>
 
-<% List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparations"); 
+<% 
+    List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparations"); 
     List<CategoriesDTO> categories = (List<CategoriesDTO>) request.getAttribute("categories");
     List<RetourDTO> resultats = (List<RetourDTO>) request.getAttribute("resultatsRecherche");
-
 %>
 
 <section class="section">
@@ -17,7 +18,7 @@
              <div class="mb-3">
                 <form action="/retour/recherche" method="post">
                         <label for="typeReparation" class="form-label">Type de reparation :</label>
-                        <select id="typeReparation" name="typeReparation" class="form-control" required>
+                        <select id="typeReparation" name="typeReparation" class="form-control">
                             <option value="">Sélectionner un type</option>
                             <% 
                                 for (TypeReparationDTO typeReparation : typeReparations) {
@@ -29,7 +30,7 @@
                         </select>
 
                         <label for="categorie" class="form-label">Type de categories :</label>
-                        <select id="categorie" name="categorie" class="form-control" required>
+                        <select id="categorie" name="categorie" class="form-control">
                             <option value="">Sélectionner un type</option>
                             <% 
                                 for (CategoriesDTO categorie : categories) {
@@ -74,7 +75,7 @@
                         <td><%= retour.getReparations().getOrdinateur().getModele().getMarque().getNomMarque() %> <%= retour.getReparations().getOrdinateur().getModele().getNomModele() %></td>
                         <td><%= (retour.getReparations().getOrdinateur().getModele().getCategorie() != null) ? retour.getReparations().getOrdinateur().getModele().getCategorie().getLibelle() : " " %></td>
                         <td><%= retour.getReparations().getTypeReparation().getLibelle() %></td>
-                        <td><%= retour.getDateRetour() %></td>
+                        <td><%= Formater.dateEnLettres(retour.getDateRetour()) %></td>
                         <td>
                             <a href="/retour/edit/<%= retour.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
                             <a href="/retour/delete/<%= retour.getId() %>" class="bi bi-trash" style="color: red;"></a>

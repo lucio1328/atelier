@@ -1,5 +1,9 @@
 package com.gestion.atelier.services;
 
+import com.gestion.atelier.DTO.MouvementsStockDTO;
+import com.gestion.atelier.DTO.ReparationsDTO;
+import com.gestion.atelier.DTO.TypeMouvementDTO;
+import com.gestion.atelier.models.MouvementsStock;
 import com.gestion.atelier.models.PiecesDetachees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +13,7 @@ import com.gestion.atelier.mappers.AchatPiecesMapper;
 import com.gestion.atelier.repository.AchatPiecesRepository;
 import com.gestion.atelier.models.AchatPieces;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +22,12 @@ public class AchatPiecesService {
 
     @Autowired
     private AchatPiecesRepository achatPiecesRepository;
+
+    @Autowired
+    private MouvementsStockService mouvementsStockService;
+
+    @Autowired
+    private TypeMouvementService typeMouvementService;
 
     private final AchatPiecesMapper achatPiecesMapper = AchatPiecesMapper.INSTANCE;
 
@@ -37,7 +48,15 @@ public class AchatPiecesService {
     // 
     public AchatPiecesDTO createAchatPiece(AchatPiecesDTO achatPiecesDTO) {
         AchatPieces achatPieces = achatPiecesMapper.achatPiecesDTOToAchatPieces(achatPiecesDTO);
+
+        TypeMouvementDTO typeMouvementDTO = typeMouvementService.getTypeMouvementById(Long.parseLong("1"));
+
         AchatPieces savedAchatPieces = achatPiecesRepository.save(achatPieces);
+        AchatPiecesDTO savedAchatDto = achatPiecesMapper.achatPiecesToAchatPiecesDTO(savedAchatPieces);
+
+        MouvementsStockDTO mouvementsStockDTO = new MouvementsStockDTO(savedAchatPieces.getQuantite(), savedAchatPieces.getDateAchat(), savedAchatDto, null, typeMouvementDTO);
+        mouvementsStockService.createMouvementStock(mouvementsStockDTO);
+
         return achatPiecesMapper.achatPiecesToAchatPiecesDTO(savedAchatPieces);
     }
 

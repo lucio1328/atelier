@@ -1,21 +1,35 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.*"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <%@page import="java.util.List"%>
 <%
     List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
+    String erreur = (String) request.getAttribute("erreur");
 %>
 <section class="section">
     <div class="row">
     <div class="col-lg-12">
         <div class="card">
+            <div>
+                <span style="color: red"><%= (erreur != null) ? erreur : "" %></span>
+            </div>
             <div class="card-body">
                 <form action="/reparations/rechercheDate" method="post">
                     <div class="mb-3">
-                        <label for="date" class="form-label">Date de reparation:</label>
+                        <label for="dateMin" class="form-label">Date de reparation entre :</label>
                         <input
                             type="date"
-                            id="date"
-                            name="date"
+                            id="dateMin"
+                            name="dateMin"
+                            class="form-control"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateMax" class="form-label">Et:</label>
+                        <input
+                            type="date"
+                            id="dateMax"
+                            name="dateMax"
                             class="form-control"
                         >
                     </div>
@@ -56,7 +70,7 @@
                         <td><%= client.getId() %></td>
                         <td><%= client.getNom() %></td>
                         <td><%= client.getPrenom() %></td>
-                        <td><%= client.getDateNaissance() %></td>
+                        <td><%= Formater.dateEnLettres(client.getDateNaissance()) %></td>
                         <td><%= client.getGenre().getLibelle() %></td>
                         <td><%= client.getEmail() %></td>
                         <td><%= client.getTelephone() %></td>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.util.List"%>
 <%@page import="com.gestion.atelier.DTO.MouvementsStockDTO"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
                         <tr>
                             <td><%= stock.getId() %></td>
                             <td><%= stock.getQuantite() %></td>
-                            <td><%= stock.getDateMouvement() %></td>
+                            <td><%= Formater.dateEnLettres(stock.getDateMouvement()) %></td>
                             <td><%= stock.getTypeMouvement() != null ? stock.getTypeMouvement().getLibelle() : "N/A" %></td>
                             <td><%= nomPiece %></td>
                         </tr>

@@ -21,7 +21,7 @@ public class RetourService {
 
     private final RetourMapper retourMapper = RetourMapper.INSTANCE;
 
-
+    //
     public List<RetourDTO> getAll() {
         List<Retour> retours = retourRepository.getAll();
         return retours.stream()
@@ -29,7 +29,8 @@ public class RetourService {
                           .collect(Collectors.toList());
     }
 
-   public RetourDTO createRetour(RetourDTO retourDTO) {
+    //
+    public RetourDTO createRetour(RetourDTO retourDTO) {
         if (retourDTO == null) {
             throw new IllegalArgumentException("Le DTO du retour ne peut pas être nul");
         }
@@ -43,6 +44,7 @@ public class RetourService {
         return retourMapper.retourToRetourDTO(savedRetour);
     }
 
+    //
     public RetourDTO getById(Long idRetour) throws Exception {
         if (idRetour == null) {
             throw new Exception("idRetour null");
@@ -51,8 +53,19 @@ public class RetourService {
         return retourMapper.retourToRetourDTO(ret);
     }
 
-    public List<RetourDTO> getByCategorieTypeReparation(Long idCat, Long idType) {
-        List<Retour> retours = retourRepository.getByCategorieTypeReparation(idCat,idType);
+    //
+    public List<RetourDTO> getByCategorieTypeReparation(String idCat, String idType) {
+        Long idCategorie = null;
+        Long idTypeReparation = null;
+
+        if(idCat != null && !idCat.isEmpty()) {
+            idCategorie = Long.parseLong(idCat);
+        }
+        if (idType != null && !idType.isEmpty()) {
+            idTypeReparation = Long.parseLong(idType);
+        }
+
+        List<Retour> retours = retourRepository.getByCategorieTypeReparation(idCategorie,idTypeReparation);
         return retours.stream()
                           .map(retourMapper::retourToRetourDTO)
                           .collect(Collectors.toList());

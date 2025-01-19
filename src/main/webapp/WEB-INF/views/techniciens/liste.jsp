@@ -1,5 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.TechniciensDTO"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 <%@page import="java.util.List"%>
 
 <section class="section">
@@ -34,7 +35,7 @@
                         <td><%= technicien.getId() %></td>
                         <td><a href="/specialiteTechnicien/liste/<%= technicien.getId() %>"><%= technicien.getNom() %></a></td>
                         <td><a href="/specialiteTechnicien/liste/<%= technicien.getId() %>"><%= technicien.getPrenom() %></a></td>
-                        <td><%= technicien.getDateNaissance() %></td>
+                        <td><%= Formater.dateEnLettres(technicien.getDateNaissance()) %></td>
                         <td><%= technicien.getGenre().getLibelle() %></td>7
                         <td><%= technicien.getEmail() %></td>
                         <td><%= technicien.getMotDePasse() %></td>

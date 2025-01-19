@@ -1,10 +1,13 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.gestion.atelier.DTO.*"%>
 <%@page import="java.util.List"%>
+<%@page import="com.gestion.atelier.utils.Formater"%>
 
-<% List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparation"); 
+<% 
+    List<TypeReparationDTO> typeReparations = (List<TypeReparationDTO>) request.getAttribute("typeReparation"); 
     List<ReparationsDTO> reparations = (List<ReparationsDTO>) request.getAttribute("reparations");
     List<ReparationsDTO> recherche = (List<ReparationsDTO>) request.getAttribute("recherche");
+    String type = (String) request.getAttribute("type");
 %>
 
 <section class="section">
@@ -17,7 +20,7 @@
                 <form action="/reparations/recherche" method="post">
                         <label for="typeReparation" class="form-label">Type de reparation :</label>
                         <select id="typeReparation" name="typeReparation" class="form-control" required>
-                            <option value="">Sélectionner un type</option>
+                            <option value="tous">Tous</option>
                             <% 
                                 for (TypeReparationDTO typeReparation : typeReparations) {
                             %>
@@ -36,7 +39,7 @@
 
         <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Liste des Reparations</h5>
+            <h5 class="card-title">Liste des Reparations : <b><%= (type != null) ? type : "" %></b></h5>
 
             <!-- Table with stripped rows -->
             <table class="table datatable">
@@ -49,6 +52,7 @@
                     <th scope="col">Technicien</th>
                     <th scope="col">Client</th>
                     <th scope="col">Ordinateur</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Actions</th>
                     <th scope="col"></th>
@@ -62,11 +66,12 @@
                     <tr>
                         <td><%= reparation.getId() %></td>
                         <td><%= reparation.getDescription() %></td>
-                        <td><%= reparation.getDateDebut() %></td>
-                        <td><%= reparation.getDateFin() %></td>
+                        <td><%= Formater.dateEnLettres(reparation.getDateDebut()) %></td>
+                        <td><%= (reparation.getDateFin() != null) ? Formater.dateEnLettres(reparation.getDateFin()) : null %></td>
                         <td><%= reparation.getTechnicien().getNom() %> <%= reparation.getTechnicien().getPrenom() %></td>
                         <td><%= reparation.getClient().getNom() %> <%= reparation.getClient().getPrenom() %></td>
-                        <td><%= reparation.getOrdinateur().getNumeroSerie() %></td>
+                        <td><%= reparation.getOrdinateur().getModele().getMarque().getNomMarque() %> <%= reparation.getOrdinateur().getModele().getNomModele() %></td>
+                        <td><%= reparation.getTypeReparation().getLibelle() %></td>
                         <td><%= reparation.getStatut().getLibelle() %></td>
                         <td>
                             <a href="/reparations/edit/<%= reparation.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
@@ -80,30 +85,6 @@
                 <% 
                         }
                     }
-                    else if(recherche != null) {
-                    for (ReparationsDTO r : recherche) {
-                %>
-                <tr>
-                    <td><%= r.getId() %></td>
-                    <td><%= r.getDescription() %></td>
-                    <td><%= r.getDateDebut() %></td>
-                    <td><%= r.getDateFin() %></td>
-                    <td><%= r.getTechnicien().getNom() %> <%= r.getTechnicien().getPrenom() %></td>
-                    <td><%= r.getClient().getNom() %> <%= r.getClient().getPrenom() %></td>
-                    <td><%= r.getOrdinateur().getNumeroSerie() %></td>
-                    <td><%= r.getStatut().getLibelle() %></td>
-                    <td>
-                        <a href="/reparations/edit/<%= r.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
-                        <a href="/reparations/delete/<%= r.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
-                        <a href="/reparationPieces/create/<%= r.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
-                    </td>
-                    <td>
-                        <a href="/retour/create?idReparation=<%= r.getId() %>"><span>Livrer</span></a>
-                    </td>
-                </tr>
-
-                <%
-                        }}
                 %>
             </tbody>
             </table>

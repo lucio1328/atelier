@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.gestion.atelier.models.Reparations;
@@ -28,14 +29,12 @@ public interface ReparationsRepository extends JpaRepository<Reparations, Long> 
     @Query("SELECT r FROM Reparations r LEFT JOIN FETCH r.technicien t LEFT JOIN FETCH r.client c LEFT JOIN FETCH r.ordinateur ordi LEFT JOIN FETCH r.statut s LEFT JOIN FETCH r.typeReparation rep WHERE r.client.id = :clientId")
     List<Reparations> getByIdClient(Long clientId);
 
-    @Query("SELECT r FROM Reparations r LEFT JOIN FETCH r.technicien t LEFT JOIN FETCH r.client c LEFT JOIN FETCH r.ordinateur ordi LEFT JOIN FETCH r.statut s LEFT JOIN FETCH r.typeReparation rep WHERE r.dateDebut >= :dateDebut AND r.dateFin <= :dateFin")
-    List<Reparations> getBetweenDate(Date dateDebut, Date dateFin);
+    List<Reparations> findByDateDebutBetween(Date startDate, Date endDate);
+    List<Reparations> findByDateDebutGreaterThanEqual(Date startDate);
+    List<Reparations> findByDateDebutLessThanEqual(Date endDate);
 
     List<Reparations> findByTypeReparation(TypeReparation type);
 
     @Query("SELECT r FROM Reparations r LEFT JOIN FETCH r.technicien t LEFT JOIN FETCH r.client c LEFT JOIN FETCH r.ordinateur ordi LEFT JOIN FETCH r.statut s LEFT JOIN FETCH r.typeReparation rep WHERE r.dateDebut = CURRENT_DATE")
     List<Reparations> getByDate();
-
-    @Query("SELECT r FROM Reparations r LEFT JOIN FETCH r.technicien t LEFT JOIN FETCH r.client c LEFT JOIN FETCH r.ordinateur ordi LEFT JOIN FETCH r.statut s LEFT JOIN FETCH r.typeReparation rep WHERE r.dateDebut = :date")
-    List<Reparations> getByDate(Date date);
 }

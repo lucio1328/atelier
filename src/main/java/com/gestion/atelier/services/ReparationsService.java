@@ -1,12 +1,20 @@
 package com.gestion.atelier.services;
 
 import com.gestion.atelier.mappers.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gestion.atelier.DTO.ReparationsDTO;
 import com.gestion.atelier.repository.ReparationsRepository;
 import com.gestion.atelier.repository.TypeReparationRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+
 import com.gestion.atelier.models.Reparations;
 import com.gestion.atelier.models.TypeReparation;
 
@@ -20,7 +28,11 @@ public class ReparationsService {
     @Autowired
     private ReparationsRepository reparationsRepository;
 
-    @Autowired TypeReparationRepository typeReparationRepository;
+    @Autowired
+    TypeReparationRepository typeReparationRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     private final ReparationsMapper reparationsMapper = ReparationsMapper.INSTANCE;
     private final TypeReparationMapper typeReparationMapper = TypeReparationMapper.INSTANCE;
@@ -101,13 +113,27 @@ public class ReparationsService {
     }
 
     //
-    public List<ReparationsDTO> getBetweenDate(Date dateDebut, Date dateFin) {
-        List<Reparations> reparations = reparationsRepository.getBetweenDate(dateDebut, dateFin);
+    public List<ReparationsDTO> getBetweenDate(String dateDebut, String dateFin) {
+        Date startDate = (dateDebut != null && !dateDebut.isEmpty()) ? Date.valueOf(dateDebut) : null;
+        Date endDate = (dateFin != null && !dateFin.isEmpty()) ? Date.valueOf(dateFin) : null;
+    
+        List<Reparations> reparations;
+    
+        if (startDate != null && endDate != null) {
+            reparations = reparationsRepository.findByDateDebutBetween(startDate, endDate);
+        } else if (startDate != null) {
+            reparations = reparationsRepository.findByDateDebutGreaterThanEqual(startDate);
+        } else if (endDate != null) {
+            reparations = reparationsRepository.findByDateDebutLessThanEqual(endDate);
+        } else {
+            reparations = reparationsRepository.findAll();
+        }
+    
         return reparations.stream()
                           .map(reparationsMapper::reparationsToReparationsDTO)
                           .collect(Collectors.toList());
-    }
-
+    }       
+    
     public List<ReparationsDTO> getByDate() {
         List<Reparations> reparations = reparationsRepository.getByDate();
         return reparations.stream()
@@ -115,19 +141,8 @@ public class ReparationsService {
                           .collect(Collectors.toList());
     }
 
-    public List<ReparationsDTO> getByDate(String date) {
-        List<Reparations> reparations = new ArrayList<>();
-        if(date !=null){
-            reparations = reparationsRepository.getByDate(Date.valueOf(date));
-        }
-        return reparations.stream()
-                          .map(reparationsMapper::reparationsToReparationsDTO)
-                          .collect(Collectors.toList());
-    }
-
     //
     public ReparationsDTO createReparation(ReparationsDTO reparationsDTO) {
-//        Reparations reparation = reparationsMapper.reparationsDTOToReparations(reparationsDTO);
         Reparations reparation = this.correspondance(reparationsDTO);
 
         Reparations savedReparation = reparationsRepository.save(reparation);
@@ -141,6 +156,7 @@ public class ReparationsService {
             throw new Exception("Réparation introuvable pour la mise à jour");
         }
         Reparations reparationToUpdate = this.correspondance(reparationsDTO);
+        reparationToUpdate.setId(existingReparation.getId());
         Reparations updatedReparation = reparationsRepository.save(reparationToUpdate);
 
         return reparationsMapper.reparationsToReparationsDTO(updatedReparation);
