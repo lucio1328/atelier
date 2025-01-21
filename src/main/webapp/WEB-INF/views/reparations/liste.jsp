@@ -46,7 +46,7 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Commission (Ar)</th>
                     <th scope="col">Date debut</th>
                     <th scope="col">Date fin</th>
                     <th scope="col">Technicien</th>
@@ -65,7 +65,7 @@
                 %>
                     <tr>
                         <td><%= reparation.getId() %></td>
-                        <td><%= reparation.getDescription() %></td>
+                        <td><%= reparation.getCommission() %></td>
                         <td><%= Formater.dateEnLettres(reparation.getDateDebut()) %></td>
                         <td><%= (reparation.getDateFin() != null) ? Formater.dateEnLettres(reparation.getDateFin()) : null %></td>
                         <td><%= reparation.getTechnicien().getNom() %> <%= reparation.getTechnicien().getPrenom() %></td>
@@ -76,7 +76,7 @@
                         <td>
                             <a href="/reparations/edit/<%= reparation.getId() %>" class="bi bi-pencil-square" style="color: green; margin-right: 20px;"></a>
                             <a href="/reparations/delete/<%= reparation.getId() %>" class="bi bi-trash" style="color: red; margin-right: 20px;"></a>
-                            <a href="/reparationPieces/create/<%= reparation.getId() %>" class="bi bi-info-circle" style="color: blue;"></a>
+                            <%-- <a href="/reparationPieces/create/<%= reparation.getId() %>" class="bi bi-info-circle" style="color: blue;"></a> --%>
                         </td>
                         <td>
                             <a href="/retour/create?idReparation=<%= reparation.getId() %>"><span>Livrer</span></a>

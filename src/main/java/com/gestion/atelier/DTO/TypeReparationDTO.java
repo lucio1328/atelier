@@ -3,6 +3,15 @@ package com.gestion.atelier.DTO;
 public class TypeReparationDTO {
     private Long id;
     private String libelle;
+    private Double commission;
+
+    public Double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Double commission) {
+        this.commission = commission;
+    }
 
     public TypeReparationDTO() {
     }

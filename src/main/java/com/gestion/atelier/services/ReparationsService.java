@@ -52,6 +52,10 @@ public class ReparationsService {
             reparations.setDateDebut(reparationsDTO.getDateDebut());
             reparations.setTechnicien(techniciensMapper.techniciensDTOToTechniciens(reparationsDTO.getTechnicien()));
             reparations.setTypeReparation(typeReparationMapper.typeReparationDTOToTypeReparation(reparationsDTO.getTypeReparation()));
+            
+            if (reparationsDTO.getDateFin() != null) {
+                reparations.setDateFin(reparationsDTO.getDateFin());
+            }
         }
         return reparations;
     }
@@ -145,6 +149,8 @@ public class ReparationsService {
     public ReparationsDTO createReparation(ReparationsDTO reparationsDTO) {
         Reparations reparation = this.correspondance(reparationsDTO);
 
+        reparation.setCommission(reparation.getTypeReparation().getCommission());
+
         Reparations savedReparation = reparationsRepository.save(reparation);
         return reparationsMapper.reparationsToReparationsDTO(savedReparation);
     }
@@ -157,6 +163,8 @@ public class ReparationsService {
         }
         Reparations reparationToUpdate = this.correspondance(reparationsDTO);
         reparationToUpdate.setId(existingReparation.getId());
+        reparationToUpdate.setCommission(existingReparation.getTypeReparation().getCommission());
+        
         Reparations updatedReparation = reparationsRepository.save(reparationToUpdate);
 
         return reparationsMapper.reparationsToReparationsDTO(updatedReparation);

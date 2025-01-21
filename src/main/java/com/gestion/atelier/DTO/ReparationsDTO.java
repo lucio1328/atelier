@@ -8,6 +8,15 @@ public class ReparationsDTO {
     private Date dateDebut;
     private Date dateFin;
     private String description;
+    public Double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Double commission) {
+        this.commission = commission;
+    }
+
+    private Double commission;
     private ClientsDTO client;
     private StatutDTO statut;
     private TechniciensDTO technicien;

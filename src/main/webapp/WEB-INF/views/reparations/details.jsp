@@ -24,6 +24,9 @@
             <div class="card-body">
                 <h5 class="card-title">Description</h5>
                 <p class="card-text"><%= reparation.getDescription() %></p>
+
+                <h5 class="card-title">Commission (Ar)</h5>
+                <p class="card-text"><%= reparation.getCommission() %></p>
                 
                 <h5 class="card-title">Date Début</h5>
                 <p class="card-text"><%= reparation.getDateDebut() %></p>

@@ -339,6 +339,11 @@
                                 <i class="bi bi-circle"></i><span>Clients</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/reparations/rechercheCommission">
+                                <i class="bi bi-circle"></i><span>Commission</span>
+                            </a>
+                        </li>
                     </ul>
                 </li><!-- End Reparation Nav -->
 
@@ -354,6 +359,24 @@
                         </li>
                         <li>
                             <a href="/recommandes/liste">
+                                <i class="bi bi-circle"></i><span>Liste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#typeReparation-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-gear"></i><span>Type Reparation</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="typeReparation-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="/typeReparation/create">
+                                <i class="ri-copper-diamond-fill"></i><span>Insertion</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/typeReparation/liste">
                                 <i class="bi bi-circle"></i><span>Liste</span>
                             </a>
                         </li>
