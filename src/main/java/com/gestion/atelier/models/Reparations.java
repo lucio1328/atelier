@@ -27,6 +27,16 @@ public class Reparations {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "commission", nullable = false)
+    private Double commission;
+
+    public Double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Double commission) {
+        this.commission = commission;
+    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_client")
     private Clients client;

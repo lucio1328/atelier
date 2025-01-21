@@ -36,6 +36,10 @@ public class TechniciensService {
                           .collect(Collectors.toList());
     }
 
+    public static Double getPourcentage(Double valeur){
+        return (valeur*5)/100;
+    }
+
     //
     public TechniciensDTO createTechnicien(TechniciensDTO techniciensDTO) {
         Techniciens technicien = techniciensMapper.techniciensDTOToTechniciens(techniciensDTO);

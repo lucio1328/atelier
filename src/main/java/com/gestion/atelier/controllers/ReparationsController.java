@@ -2,6 +2,7 @@ package com.gestion.atelier.controllers;
 
 import java.sql.Date;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,6 +66,26 @@ public class ReparationsController {
         } 
         catch (Exception e) {
             modelAndView.addObject("view", "reparations/listeClient.jsp");
+            modelAndView.addObject("erreur", e.getMessage());
+
+            return modelAndView;
+        }
+
+    }
+
+    @PostMapping("/rechercheDaty")
+    public ModelAndView rechercheDaty(@RequestParam("dateMin") String dateMin, @RequestParam("dateMax") String dateMax){
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        try {
+            List<ReparationsDTO> reparations = reparationsService.getBetweenDate(dateMin, dateMax);
+
+            modelAndView.addObject("view", "reparations/recherche.jsp");
+            modelAndView.addObject("reparations", reparations);
+
+            return modelAndView;
+        } 
+        catch (Exception e) {
+            modelAndView.addObject("view", "reparations/recherche.jsp");
             modelAndView.addObject("erreur", e.getMessage());
 
             return modelAndView;
@@ -240,7 +261,7 @@ public class ReparationsController {
         }
                                     
         try {
-            if (description != null && dateDebut != null && technicien != null && ordinateur != null && statut != null) {
+            if (description != null && dateDebut != null && dateFin != null && technicien != null && ordinateur != null && statut != null) {
                 Long idTech = Long.parseLong(technicien);
                 TechniciensDTO technicienDTO = techniciensService.getById(idTech);
 
@@ -262,11 +283,12 @@ public class ReparationsController {
                 reparationsDTO.setOrdinateur(ordinateurDTO);
                 reparationsDTO.setStatut(statuDTO);
                 reparationsDTO.setClient(clientDTO); 
-                System.out.println("Date fin : "+reparationsDTO.getDateFin());             
+                
+                reparationsService.updateReparation(id, reparationsDTO);
+                return new ModelAndView("redirect:/reparations/liste");
             }
-
-            reparationsService.updateReparation(id, reparationsDTO);
-            return new ModelAndView("redirect:/reparations/liste");
+            return new ModelAndView();
+    
         } 
         catch (Exception e) {
             ModelAndView mav = new ModelAndView("accueil");
@@ -323,6 +345,17 @@ public class ReparationsController {
         mav.addObject("reparation", reparation);
 
         return mav;
+    }
+
+    @GetMapping("/rechercheCommission")
+    public ModelAndView rechercheCommission(){
+        ModelAndView modelAndView = new ModelAndView("accueil");
+        List<ReparationsDTO> reparations = reparationsService.getByDate();
+
+        modelAndView.addObject("view", "reparations/recherche.jsp");
+        modelAndView.addObject("reparations", reparations);
+
+        return modelAndView;
     }
 
 }
