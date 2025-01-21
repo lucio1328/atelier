@@ -16,6 +16,17 @@ public class TypeReparation {
     @Column(name = "libelle", nullable = false, unique = true)
     private String libelle;
 
+    @Column(name= "commission", nullable = false)
+    private Double commission;
+
+    public Double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(Double commission) {
+        this.commission = commission;
+    }
+
     public Long getId() {
         return id;
     }
